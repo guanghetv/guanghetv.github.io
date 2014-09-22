@@ -1,0 +1,12 @@
+# Site settings
+title: Guanghe.tv
+email: dev@guanghe.tv
+description: "光合新知开发者博客"
+baseurl: ""
+url: "http://blog.guanghe.tv"
+twitter_username: guanghetv
+github_username:  guanghetv
+
+# Build settings
+markdown: kramdown
+permalink: pretty
