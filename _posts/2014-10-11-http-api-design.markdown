@@ -18,11 +18,12 @@ author: "libook"
 由于此前看了好多宣传MongoDB优势的文章，现在要基于MongoDB设计数据结构还真有点小激动。
 
 当时列出了很多方案，因为在用户看来，学校、班级和学生之间的关系是这样的：
+
 > 学生和老师 =(属于)=> 班级 =(属于)=> 学校
 
 学生和老师是用户，有单独的Collection，而MongoDB是面向JSON文档的，那么我完全可以把学校和班级塞入同一个Collection中，将班级的JSON文档嵌入到学校的JSON文档中——没有MongoDB使用经验的我这样想道，而且没做试验和调查就这样做了，实现的数据结构如下：
 
-{% highlight json %}
+```javascript
 {
     schoolId:ObjectId,
     schoolName:String,
@@ -35,11 +36,12 @@ author: "libook"
         }
     ]
 }
-{% endhighlight %}
+```
 
 那时找到了一个异常强大、名字却超长的数据持久化框架——[express-restify-mongoose](http://florianholzapfel.github.io/express-restify-mongoose/)，使用这玩意儿只需要定义一个Schema，就能自动帮你创创建好所有CRUD操作的WEB API以及API对应的数据库方法，甚至支持模糊、排序、分页等高级的查询方法，开创了傻瓜写服务端的先河～～不过这东西竟然不支持嵌入式文档的查询，所以这次无缘使用了，只好自己设计WEB API和写Controller以及数据库方法。
 
 在设计HTTP API的时候也遵照数据结构设计成了如下样式：
+
 > /schools
 > /school/:schoolId
 > /school/:schoolId/rooms
@@ -53,6 +55,7 @@ author: "libook"
 因为MongoDB查询的单位是Collection中的最顶级的Document，所以我每次查询都只会返回学校的文档，没错！即便我查询的是一个班级，它也会返回整个学校，这时我就只能用嵌套的for循环来把我真正查询的班级从学校中再“查询”出来。
 
 显然，这个操作交给客户端去做是不合理的，那样的话如下三个WEB API的功能就一模一样了：
+
 > /school/:schoolId
 > /school/:schoolId/rooms
 > /school/:schoolId/room/:roomId
@@ -63,12 +66,12 @@ author: "libook"
 
 于是，客户端中的所谓班级模型实际上是**伪**学校模型，只不过这个学校下面只有一个班级的信息，每次使用都要一边提醒自己：“这货是个数组”，另一边把出BUG的代码做如下修改：
 
-{% highlight javascript %}
+```javascript
 //把
 room.rooms.roomName；
 //改成
 room.rooms[0].roomName；
-{% endhighlight %}
+```
 
 而**真**学校模型也时常存在，那么代码的可读性就被完全摧毁了，因为一段看起来极像是在处理学校模型的代码其实是在处理班级模型。。。
 
@@ -76,6 +79,7 @@ room.rooms[0].roomName；
 有的时候我会进行班级的条件查询，那么这下拿到的不是一个包含所有符合条件的班级的数组，没错，是一个学校，而学校下面才是符合条件的所有班级。
 
 于是很别扭地一边提醒自己：“这货是个学校对象”，另一边把出BUG的代码做如下修改：
+
 ```javascript
 //把
 rooms[roomIndex].roomName；
@@ -107,6 +111,7 @@ CTO大人慈祥地对我说：孩子，重构吧！
 
 * 由于API的controller中写了过于详细的业务逻辑（如定制的输入输出数据结构、权限判定），所以实现出来的API不具有通用性和扩展性，导致的结果是，分明是同类的功能反而要写几套名称不同的API，大大地加重了代码冗余，同时也失去了作为API应有的意义。
 * HTTP API的命名规则混乱；试想一下，如果需要把同一类功能写成不同的多个API的话，API的名称是不能冲突的，就拿班级来讲，有可能不同的API我要写成如下这种：
+
 >  /room
 >  /class
 >  /banJi
@@ -114,6 +119,7 @@ CTO大人慈祥地对我说：孩子，重构吧！
 >  ......
 
 *  HTTP API过长；由于此前是学校里面嵌入班级的文档，那么想当然地就将API设计成了如下所示，实际上后两个API当中的school没什么意义，因为room的ID本身就是唯一的：
+
 >  /schools
 >  /school/:schoolId
 >  /school/:schoolId/rooms
@@ -124,6 +130,7 @@ CTO大人慈祥地对我说：孩子，重构吧！
 重构主要考虑一下四个方面：
 
 ####1. 精简
+
 把最复杂的变成最简单的，才是最高明的。
 
 * 精简API数量，同类功能尽量使用同一个HTTP API；
@@ -131,14 +138,17 @@ CTO大人慈祥地对我说：孩子，重构吧！
 * 精锐代码，算法要保持简单高效。
 
 ####2. 通用
+
 HTTP API就像是原料，可以制作成什么东西取决于如何利用；但如果一个原料已经具有复杂的结构和功能，那么这个原料所能制成的产品就少之又少了。
 为了提高功能和代码的复用率，HTTP API不需要考虑任何用户背景（如权限）以及其他冗余功能；所以很简单的，客户端发送一定的规范化的请求，经过处理后服务返回事先约定的通用数据；数据如何使用交给客户端程序来决定。
 需要说明的是权限系统应该是额外的一套系统，将HTTP API放在权限系统之后，任何请求先经过权限系统的审核。
 
 ####3. 扩展
+
 同类的请求使用同一API，对输入和输出的不同需求要么让客户端的服务自己解决，要么使用不同的API参数来定制，有前面精简和通用的铺垫，高扩展性便是自然且方便的。
 
 ####4. 合理
+
 一栋大楼是否稳固，往往取决于地基是否牢靠。
 HTTP API作为系统的基础部分，要尽可能设计地合理，特别是输入输出，一旦重构无异于将整个系统推倒重做。
 
@@ -148,6 +158,7 @@ HTTP API作为系统的基础部分，要尽可能设计地合理，特别是输
 
 为了实现充分精简、通用、扩展与合理，我打算使用本文一开始提到的[express-restify-mongoose](http://florianholzapfel.github.io/express-restify-mongoose/)，哈哈，不要说我偷懒，之前不能用这个框架是因为它不支持嵌入式文档（MongoDB本身就不支持），现在将文档分离了，所以可以直接使用这个框架。
 最具有吸引力的是这个框架支持collection之间的ref引用功能，我可以通过配置Schema来直接使用populate参数取出ref引用的对象，如：
+
 >  /rooms/:roomId?populate=students,school
 >  返回的班级对象包含完整的学校对象和学生对象
 
@@ -190,8 +201,9 @@ HTTP API作为系统的基础部分，要尽可能设计地合理，特别是输
     * Provide resource (UU)IDs——提供资源ID
     我的看法：其实作者想说的是全球唯一的ID（如UUID），这样有助于和其他（企业）的服务进行对接。但是究竟是需要每一个数据对象都要用UUID编号还是只是在对外结构使用UUID编号，具体还要看需求。
     * Provide standard timestamps——提供标准的时间戳
-    我的看法：大多类型的业务逻辑都需要数据对象有创建时间和修改时间。
-    * Use UTC times formatted in ISO8601——使用ISO8601标准中的UTC时间格式
+		我的看法：大多类型的业务逻辑都需要数据对象有创建时间和修改时间。   
+
+		* Use UTC times formatted in ISO8601——使用ISO8601标准中的UTC时间格式
     我的看法：千万不要用本地时间，另外也要确定服务器环境使用的是UTC时间，特别是国际化和与其他（企业）的系统协作的时候，使用UTC时间可以避免混乱和莫名其妙的BUG。
     * Nest foreign key relations——嵌套外键引用
     我的看法：怎么说呢？嵌套问题是我之前遇到的最大的坑，明确好嵌套关系非常重要，特别是MongoDB这样不支持嵌入式文档操作的情况。我的实现方式是使用Mongoose和restify自带的ref引用功能，可以使用一条请求同时拿到相关联的多个对象，返回的JSON表现为一个主要对象嵌套多个子对象。

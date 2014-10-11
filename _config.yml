@@ -8,5 +8,5 @@ twitter_username: guanghetv
 github_username:  guanghetv
 
 # Build settings
-markdown: kramdown
-permalink: pretty
+markdown: redcarpet
+permalink: /:year/:month/:title.html
