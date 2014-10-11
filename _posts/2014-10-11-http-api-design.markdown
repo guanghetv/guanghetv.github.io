@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "HTTP API Desig"
-categories: "技术心得"
+title:  "HTTP API Design"
+categories: tech
 author: "libook"
 ---
 
@@ -21,7 +21,8 @@ author: "libook"
 > 学生和老师 =(属于)=> 班级 =(属于)=> 学校
 
 学生和老师是用户，有单独的Collection，而MongoDB是面向JSON文档的，那么我完全可以把学校和班级塞入同一个Collection中，将班级的JSON文档嵌入到学校的JSON文档中——没有MongoDB使用经验的我这样想道，而且没做试验和调查就这样做了，实现的数据结构如下：
-```json
+
+{% highlight json %}
 {
     schoolId:ObjectId,
     schoolName:String,
@@ -34,7 +35,7 @@ author: "libook"
         }
     ]
 }
-```
+{% endhighlight %}
 
 那时找到了一个异常强大、名字却超长的数据持久化框架——[express-restify-mongoose](http://florianholzapfel.github.io/express-restify-mongoose/)，使用这玩意儿只需要定义一个Schema，就能自动帮你创创建好所有CRUD操作的WEB API以及API对应的数据库方法，甚至支持模糊、排序、分页等高级的查询方法，开创了傻瓜写服务端的先河～～不过这东西竟然不支持嵌入式文档的查询，所以这次无缘使用了，只好自己设计WEB API和写Controller以及数据库方法。
 
@@ -61,12 +62,14 @@ author: "libook"
 这个“剃出”操作便是一段又一段的for循环操作，代码中随处可见各种嵌套的for循环，写代码的时候很痛苦，看代码的时候也很痛苦。
 
 于是，客户端中的所谓班级模型实际上是**伪**学校模型，只不过这个学校下面只有一个班级的信息，每次使用都要一边提醒自己：“这货是个数组”，另一边把出BUG的代码做如下修改：
-```javascript
+
+{% highlight javascript %}
 //把
 room.rooms.roomName；
 //改成
 room.rooms[0].roomName；
-```
+{% endhighlight %}
+
 而**真**学校模型也时常存在，那么代码的可读性就被完全摧毁了，因为一段看起来极像是在处理学校模型的代码其实是在处理班级模型。。。
 
 你以为这就结束了吗？当然没有！
