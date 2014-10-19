@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Brower and Nginx cache"
+categories: tech
+author: "gynsolomon"
+---
+
     最近开发完成了一个前端页面的功能，代码已经在本地测试成功，然后发布到云端服务器。但奇怪的是，所有人的浏览器打开这个页面时，第一次访问时页面上却还是显示为老样子，强制刷新后则变为新提交的逻辑。
 
     于是开始 debug
