@@ -41,10 +41,10 @@ angular.module(Test.controllers, [])
 ```
 
 ```javascript
-<input ng-model='Test.peopleName'>
- <button ng-click='Test.showMessage()'>showPeopleName</button>
+<input ng-model='Test.peopleName' />
+<button ng-click='Test.showMessage()'>showPeopleName</button>
 <div ng-controller='InnerTestController as InnerTest'>
-    <input ng-model='InnerTest.peopleName'>
+    <input ng-model='InnerTest.peopleName' />
     <button ng-click='InnerTest.showMessage()'>showInnerPeopleName</button>
 </div>
 ```  
@@ -156,12 +156,8 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     ```javascript
     <ul>
         <li ng-repeat='email in emails'>
-            <a ng-href='#/from/{{email.sender}}'>
-                {{email.sender}}
-            </a>
-            <a ng-href='#/email/{{email.id}}'>
-                {{email.subject}}
-            </a>
+            <a ng-href='#/from/{{email.sender}}'>{{email.sender}}</a>
+            <a ng-href='#/email/{{email.id}}'>{{email.subject}}</a>
         </li>
     </ul>
     ```
