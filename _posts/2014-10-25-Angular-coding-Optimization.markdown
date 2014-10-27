@@ -123,8 +123,7 @@ setTimeout(function(){
         })
     ```
     
-**(个人理解:标签用来展示数据，属性用来修饰数据，对于展示，即不与其他标签的数据相互影响，则作用域是独立的。对于属性，用来修改标签所展示的数据
-，因此通过继承来得到标签作用域下的数据)**
+**(个人理解:标签用来展示数据，属性用来修饰数据，对于展示，即不与其他标签的数据相互影响，则作用域是独立的。对于属性，用来修改标签所展示的数据，因此通过继承来得到标签作用域下的数据)**
 
 ***
 
@@ -143,8 +142,7 @@ $routeProvider.when('/', {
 })
 ```
 
-DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,resolve会等待每一个promise都有结果后才会继续渲染视图。视图所对应的控制器
-中择可以直接使用resolve中的数据，比如userData。
+DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,resolve会等待每一个promise都有结果后才会继续渲染视图。视图所对应的控制器中择可以直接使用resolve中的数据，比如userData。
 
 ***
 
@@ -156,21 +154,21 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     ```javascript
     <ul>
         <li ng-repeat='email in emails'>
-            <a ng-href='#/from/{{email.sender}}'>{{email.sender}}</a>
-            <a ng-href='#/email/{{email.id}}'>{{email.subject}}</a>
+            <a ng-href='#/from/\{\{email.sender\}\}'>\{\{email.sender\}\}</a>
+            <a ng-href='#/email/\{\{email.id\}\}'>\{\{email.subject\}\}</a>
         </li>
     </ul>
     ```
 
-    如果有emails的长度为100,那么这一段代码将产生500个$watch,会很明显的降低应用程序的性能。我们并不需要这么多的永久监控器，绑定一次就够了。
+如果有emails的长度为100,那么这一段代码将产生500个$watch,会很明显的降低应用程序的性能。我们并不需要这么多的永久监控器，绑定一次就够了。
     
 - 使用bindonce
 
     ```javascript
     <ul>
          <li bindonce='email' ng-repeat='email in emails'>
-             <a bo-href-i='#/from/{{email.sender}}' bo-text="email.sender"></a>
-             <a bo-href-i='#/email/{{email.id}}' bo-text="email.subject"></a>
+             <a bo-href-i='#/from/\{\{email.sender\}\}' bo-text="email.sender"></a>
+             <a bo-href-i='#/email/\{\{email.id\}\}' bo-text="email.subject"></a>
          </li>
      </ul>
     ```
