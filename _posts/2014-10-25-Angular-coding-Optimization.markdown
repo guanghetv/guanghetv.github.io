@@ -147,5 +147,5 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
 ```
 ***
 - ###资料参考
-1.[angularjs-style-guide](https://github.com/gocardless/angularjs-style-guide#parts-of-angular)
-2.[top-10-mistakes-angularjs-developers-make](http://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make)
+    - [angularjs-style-guide](https://github.com/gocardless/angularjs-style-guide#parts-of-angular)
+    - [top-10-mistakes-angularjs-developers-make](http://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make)
