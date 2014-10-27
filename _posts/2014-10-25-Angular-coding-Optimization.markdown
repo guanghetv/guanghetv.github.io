@@ -154,8 +154,8 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     ```javascript
     <ul>
         <li ng-repeat='email in emails'>
-            <a ng-href='#/from/\{\{email.sender\}\}'>\{\{email.sender\}\}</a>
-            <a ng-href='#/email/\{\{email.id\}\}'>\{\{email.subject\}\}</a>
+            <a ng-href='#/from/{{email.sender}}'>{{email.sender}}</a>
+            <a ng-href='#/email/{{email.id}}'>{{email.subject}}</a>
         </li>
     </ul>
     ```
@@ -167,8 +167,8 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     ```javascript
     <ul>
          <li bindonce='email' ng-repeat='email in emails'>
-             <a bo-href-i='#/from/\{\{email.sender\}\}' bo-text="email.sender"></a>
-             <a bo-href-i='#/email/\{\{email.id\}\}' bo-text="email.subject"></a>
+             <a bo-href-i='#/from/{{email.sender}}' bo-text="email.sender"></a>
+             <a bo-href-i='#/email/{{email.id}}' bo-text="email.subject"></a>
          </li>
      </ul>
     ```
