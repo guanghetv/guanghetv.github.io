@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Angular-coding-optimization"
+title:  "Angular 代码优化"
 categories: tech
 author: "YshadowZ"
 ---
@@ -151,7 +151,7 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
 
 - 使用ng
 
-    ```javascript
+    ```html
     <ul>
         <li ng-repeat='email in emails'>
             <a ng-href='#/from/{{email.sender}}'>{{email.sender}}</a>
@@ -164,7 +164,7 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     
 - 使用bindonce
 
-    ```javascript
+    ```html
     <ul>
          <li bindonce='email' ng-repeat='email in emails'>
              <a bo-href-i='#/from/{{email.sender}}' bo-text="email.sender"></a>
