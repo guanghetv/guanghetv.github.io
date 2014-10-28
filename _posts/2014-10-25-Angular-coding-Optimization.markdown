@@ -150,7 +150,7 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
 使用[bindonce](https://github.com/pasvaz/bindonce)这个插件可以很容易的实现。对比举例如下(emails是常量数组)
 
 - 使用ng
-
+{% raw %}
     ```html
     <ul>
         <li ng-repeat='email in emails'>
@@ -159,11 +159,12 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
         </li>
     </ul>
     ```
-
+{% endraw %}
 如果有emails的长度为100,那么这一段代码将产生500个$watch,会很明显的降低应用程序的性能。我们并不需要这么多的永久监控器，绑定一次就够了。
     
 - 使用bindonce
 
+{% raw %}
     ```html
     <ul>
          <li bindonce='email' ng-repeat='email in emails'>
@@ -172,6 +173,7 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
          </li>
      </ul>
     ```
+{% endraw %}
 
 ***
 
