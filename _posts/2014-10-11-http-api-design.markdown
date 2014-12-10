@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "HTTP API Design"
+title:  "HTTP API 设计"
 categories: tech
 author: "libook"
 ---
@@ -68,9 +68,9 @@ author: "libook"
 
 ```javascript
 //把
-room.rooms.roomName；
+room.rooms.roomName;
 //改成
-room.rooms[0].roomName；
+room.rooms[0].roomName;
 ```
 
 而**真**学校模型也时常存在，那么代码的可读性就被完全摧毁了，因为一段看起来极像是在处理学校模型的代码其实是在处理班级模型。。。
@@ -82,9 +82,9 @@ room.rooms[0].roomName；
 
 ```javascript
 //把
-rooms[roomIndex].roomName；
+rooms[roomIndex].roomName;
 //改成
-rooms.rooms[roomIndex].roomName；
+rooms.rooms[roomIndex].roomName;
 ```
 
 什么？您感到一阵晕眩？哈哈，我也是@_@
@@ -201,7 +201,7 @@ HTTP API作为系统的基础部分，要尽可能设计地合理，特别是输
     * Provide resource (UU)IDs——提供资源ID
     我的看法：其实作者想说的是全球唯一的ID（如UUID），这样有助于和其他（企业）的服务进行对接。但是究竟是需要每一个数据对象都要用UUID编号还是只是在对外结构使用UUID编号，具体还要看需求。
     * Provide standard timestamps——提供标准的时间戳
-    我的看法：大多类型的业务逻辑都需要数据对象有创建时间和修改时间。   
+    我的看法：大多类型的业务逻辑都需要数据对象有创建时间和修改时间。
     * Use UTC times formatted in ISO8601——使用ISO8601标准中的UTC时间格式
     我的看法：千万不要用本地时间，另外也要确定服务器环境使用的是UTC时间，特别是国际化和与其他（企业）的系统协作的时候，使用UTC时间可以避免混乱和莫名其妙的BUG。
     * Nest foreign key relations——嵌套外键引用

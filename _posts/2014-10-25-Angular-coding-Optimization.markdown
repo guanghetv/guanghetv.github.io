@@ -20,7 +20,7 @@ angular.module('Test', ['ngRoute', 'Test.controllers'])
             templateUrl: './test.html',
             controller: 'TestController',
             controllerAs: 'Test'
-        })    
+        })
     })
 ```
 
@@ -40,7 +40,7 @@ angular.module(Test.controllers, [])
     })
 ```
 
-```javascript
+```html
 <input ng-model='Test.peopleName' />
 <button ng-click='Test.showMessage()'>showPeopleName</button>
 <div ng-controller='InnerTestController as InnerTest'>
@@ -48,7 +48,7 @@ angular.module(Test.controllers, [])
     <button ng-click='InnerTest.showMessage()'>showInnerPeopleName</button>
 </div>
 ```  
-  
+
 **在这里，$scope的$on,$broadcast,$emit并不适用于Test或InnerTest，但并不影响在controller中继续使用$scope作为$on,$broadcast,$emit的载体，controllerAs属性只是使的视图上绑定的变量更加清晰明了。**
 
 ***
@@ -100,7 +100,7 @@ setTimeout(function(){
 ###指令类型与指令作用域
 
 - 标签类型的指令一般拥有分离的作用域，如下
-    
+
     ```javascript
     angular.module('Test', [])
         .directive('testDirective', function(){
@@ -110,9 +110,9 @@ setTimeout(function(){
             }
         })
     ```
-    
+
 - 属性类型的指令一般拥有继承的作用域，如下
-    
+
     ```javascript
     angular.module('Test', [])
         .directive('testDirective', function(){
@@ -122,7 +122,7 @@ setTimeout(function(){
             }
         })
     ```
-    
+
 **(个人理解:标签用来展示数据，属性用来修饰数据，对于展示，即不与其他标签的数据相互影响，则作用域是独立的。对于属性，用来修改标签所展示的数据，因此通过继承来得到标签作用域下的数据)**
 
 ***
@@ -161,7 +161,7 @@ DataProvider是一个服务，DataProvider.getUser()返回的是一个promise,re
     ```
 {% endraw %}
 如果有emails的长度为100,那么这一段代码将产生500个$watch,会很明显的降低应用程序的性能。我们并不需要这么多的永久监控器，绑定一次就够了。
-    
+
 - 使用bindonce
 
 {% raw %}

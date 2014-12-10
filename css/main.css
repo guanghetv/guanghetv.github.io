@@ -412,3 +412,34 @@ a:visited { color: #205caa; }
 p{
 	white-space: pre-line;
 }
+
+
+/**
+* Highlight Style
+*/
+.post pre,
+.post code{
+  color: white;
+  background-color: #000;
+}
+
+
+.highlight .kd{
+  color: #96CBFE;
+}
+
+.highlight .nx{
+  color: #ccc;
+}
+
+.highlight .o{
+  color: #EDEDED;
+}
+
+.highlight .p{
+  color: white;
+}
+
+.highlight .nt{
+  color: #d14;
+}
