@@ -31,7 +31,8 @@ Material Angular(以下简称MA) 是一组 Material Design(以下简称MD) 风�
 ##二、ui-router 前端路由框架 （http://angular-ui.github.io/ui-router）
 
 ui-router 是 angular-ui项目组下面的一个子项目。关于angular-ui，更详细的了解可以查阅 http://angular-ui.github.io ，这个可以称为angular前端开发的宝库也不为过。
-在angular单页面应用开发中，配置页面跳转的URL, 以及为每个URL绑定controller,最常见的做法是使用$routeProvider，这是属于ngRoute这个module的一个provider. 使用.when方法可以很方便地配置每个子页面（partial）。而ui-router其实做了大部分相同的工作，区别在于，ui-router引进了一个叫做"state"的概念。ui-router内部不再是子页面的跳转，而是state的跳转，子页面与state不必一一对应，它们的链接和嵌套通过<ui-view/>这个标签来索引。在任何页面内部，如果需要发生state跳转，只需要在此页面的相应位置写入<ui-view/>标签，然后调用$state.go('xxxx')方法，就可以将子state对应的html模板填充到ui-view的位置上来。
+
+在angular单页面应用开发中，配置页面跳转的URL,以及为每个URL绑定controller,最常见的做法是使用$routeProvider，这是属于ngRoute这个module的一个provider. 使用.when方法可以很方便地配置每个子页面（partial）。而ui-router其实做了大部分相同的工作，区别在于，ui-router引进了一个叫做"state"的概念。ui-router内部不再是子页面的跳转，而是state的跳转，子页面与state不必一一对应，它们的链接和嵌套通过<ui-view/>这个标签来索引。在任何页面内部，如果需要发生state跳转，只需要在此页面的相应位置写入<ui-view/>标签，然后调用$state.go('xxxx')方法，就可以将子state对应的html模板填充到ui-view的位置上来。
 
 在课程后台中，因为课程层级层层嵌套的缘故，在编辑过程中，几乎每个层级都需要对子层级的内容进行导航和索引。反映到UI界面上，就是大量地使用了标签页、侧边栏导航等控件。而这恰恰是ui-router的强项。关于这一点，可以在这个官方的Demo中看到相关效果（http://angular-ui.github.io/ui-router/sample/#/contacts）。导航栏中的每一个item都对应着一个itemId或者index，通过调用.go方法时传参的方式，将itemId传给子state, 就可以让子state绑定的模板显示出对应着该ID的子内容。我猜测，也正因为这种设计使得UI界面跟state还有路由框架紧密联系在一起，所以ui-router才将UI两个字母跟router放在了一起，共同组成了这款前端路由框架的名字。
 
@@ -40,7 +41,6 @@ ui-router 是 angular-ui项目组下面的一个子项目。关于angular-ui，�
 现在问题来了，如果我不想放弃ngRoute，但又想尝试ui-router新鲜方便的功能怎么办？在这个问题上，课程后台项目开发过程中，走过了一个天大的坑。$routeProvider 和 $stateProvider 配置页面路由，都是基于白名单机制的，凡是不在各自的配置中的URL，遇到后，要么报出404 error，要么遵循otherwise路径去导向预先配置的页面。而ngRoute 和 ui-router又都有各自不同的otherwise provider,这导致如果在项目中直接同时使用这两个module，它们会互相争夺对前端路由的控制权，最终出现不可预料的结果。在经历了无数的错误尝试和痛苦之后，我们逐渐摸索到了让两者和平共处的方式，并最终形成了这段代码https://gist.github.com/gynsolomon/bfee1c81b2eb478d896f 。实现方式是让$stateProvider优先取得路由的控制权，然后在otherwise方法中去匹配$routeProvider中的全部URLs，只要满足当前URL属于这些URLs的情况，就将页面路由控制权导向routeProvider, 从而实现两者白名单的融合。
 
 顺便提一句，需要在index.html <body>中同时填入<ng-view/> 和 <ui-view/>， 因为这是两者各自依赖的顶级入口。
-
 
 ##三、前后端 API 和数据通路
 
@@ -60,7 +60,6 @@ CourseStructure这个service，就是所谓的课程数据的provider。课程�
 
 欢迎fork项目并进行进一步加工。
 
-
 ##五、交互视频模块的实现方式
     
 交互视频模块是整个课程后台项目中难度最大也是花费时间最长且需求变化最多的地方。体现在代码上，就是我写了两个版本。在components/directives下可以看到两个名字非常像的文件夹，分别是hyper-point-editor 和 interactive-point-editor。最终在项目中使用的是前者。
@@ -70,7 +69,6 @@ CourseStructure这个service，就是所谓的课程数据的provider。课程�
 那么这两个版本的差异，主要体现在界面和默认值上面。因为上述的设计，使得配置跳转逻辑相当灵活，interactive-point-editor这个版本就索性将所有的域开放给课程编辑，甚至不怎么区分是跳转到主视频还是分支视频，全凭课程编辑录入的url来判断。而且当时的schema也支持这种形式。当后来随着洋葱数学前台关于这部分逻辑的调整（有一封邮件），以及课程编辑感觉全部放开的权限反而使其录入工作变得繁琐，于是更新了第二个版本，就是hyper-point-editor. 这个版本在界面上做了简化，默认跳转到主视频并赋值给jumpVideo.time = null.
 
 这个directive确实体积庞大，其中不仅自身是封装，还用到了time-transformer 和 video-selector这两个directive。
-
 
 ##六、对课程后台产品未来形态的思考及建议 
 
