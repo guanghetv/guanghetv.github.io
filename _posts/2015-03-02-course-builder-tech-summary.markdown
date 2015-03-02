@@ -40,7 +40,7 @@ ui-router 是 angular-ui项目组下面的一个子项目。关于angular-ui，�
 
 现在问题来了，如果我不想放弃ngRoute，但又想尝试ui-router新鲜方便的功能怎么办？在这个问题上，课程后台项目开发过程中，走过了一个天大的坑。$routeProvider 和 $stateProvider 配置页面路由，都是基于白名单机制的，凡是不在各自的配置中的URL，遇到后，要么报出404 error，要么遵循otherwise路径去导向预先配置的页面。而ngRoute 和 ui-router又都有各自不同的otherwise provider,这导致如果在项目中直接同时使用这两个module，它们会互相争夺对前端路由的控制权，最终出现不可预料的结果。在经历了无数的错误尝试和痛苦之后，我们逐渐摸索到了让两者和平共处的方式，并最终形成了这段代码https://gist.github.com/gynsolomon/bfee1c81b2eb478d896f 。实现方式是让$stateProvider优先取得路由的控制权，然后在otherwise方法中去匹配$routeProvider中的全部URLs，只要满足当前URL属于这些URLs的情况，就将页面路由控制权导向routeProvider, 从而实现两者白名单的融合。
 
-顺便提一句，需要在index.html '<body>'中同时填入 '<ng-view/> 和 '<ui-view/>'， 因为这是两者各自依赖的顶级入口。
+顺便提一句，需要在index.html body中同时填入ng-view 和 ui-view， 因为这是两者各自依赖的顶级入口。
 
 ##三、前后端 API 和数据通路
 
