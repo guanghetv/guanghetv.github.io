@@ -26,7 +26,7 @@ Material Angular(以下简称MA) 是一组 Material Design(以下简称MD) 风�
 
 课程后台的特殊性在于，它是一款面向洋葱数学课程编辑团队内部的产品，对界面的要求并不像前台产品那样需要高定制化、个性化。简而言之，这款产品最大的价值就是它的实用性。所以在开发过程中，除了前期有相关产品人员出具产品需求和页面线框图之外，项目过程中完全没有设计人员参与其中。为了最大程度地保证产品的用户体验和界面美观度，这就需要开发人员除了设计产品逻辑架构外，还要兼起交互设计甚至一部分UI设计的工作。在这样的现实情况下，使用MA，大大减轻了这部分的工作量，可以看到课程后台项目中大量使用MA的组件和服务，也保证了界面风格的一致；而flex小巧且简便的布局方式也很好地满足了并不苛刻的界面布局要求。
 
-以$mdDialog这个service为例，只需要将该服务注入到需要使用的地方，调用.alert或者.show方法，即可快速地在页面前端展现一个对话框，后者是用来实现自定义界面的方法，可以像定义directive那样传入template、locals本地变量还有resolve一些promise等等。而在html中，使用<md-dialog></md-dialog>这样一对标签，就可以快速地将想要展现的内容封装起来;flex方面，课程后台界面中存在大量以左右导航，上下排列实现的界面布局，对于html来说，在<div>标签中添加 layout 属性，即可方便配置，<div layout="row" layout-align="center center" layout-margin></div>这样的一条语句即可将放置在div内部的元素按照行排列，且实现上下左右全部居中且智能安排margin的效果，就是这么简单！
+以$mdDialog这个service为例，只需要将该服务注入到需要使用的地方，调用.alert或者.show方法，即可快速地在页面前端展现一个对话框，后者是用来实现自定义界面的方法，可以像定义directive那样传入template、locals本地变量还有resolve一些promise等等。而在html中，使用md-dialog这样一对标签，就可以快速地将想要展现的内容封装起来;flex方面，课程后台界面中存在大量以左右导航，上下排列实现的界面布局，对于html来说，在div标签中添加 layout 属性，即可方便配置，div layout="row" layout-align="center center" layout-margin这样的一条语句即可将放置在div内部的元素按照行排列，且实现上下左右全部居中且智能安排margin的效果，就是这么简单！
 
 ##二、ui-router 前端路由框架 （http://angular-ui.github.io/ui-router）
 
