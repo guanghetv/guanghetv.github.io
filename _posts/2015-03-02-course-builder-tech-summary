@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "课程后台技术总结"
+categories: tech
+author: "gynsolomon"
+---    
     本文是我在洋葱数学“课程后台”项目过程中积累的技术经验介绍和遇到一些问题的解决方案记录。
 
     本文主要包含以下几个方面：
