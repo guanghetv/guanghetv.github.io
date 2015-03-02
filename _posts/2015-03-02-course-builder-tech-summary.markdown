@@ -50,11 +50,11 @@ ui-router 是 angular-ui项目组下面的一个子项目。关于angular-ui，�
 
 CourseStructure这个service，就是所谓的课程数据的provider。课程后台前端界面中，有许多关于课程层级的添加按钮。比如添加基础、提高、挑战等任务，再比如添加交互、巩固等模块。这些地方如果写死在html中，将来课程结构如果发生变动，调整起来难度就非常大。而CourseStructure这个service就相当于一个配置文件，任何课程层级的结构，都可以在这里进行配置，包括它们的name、type、title等等属性。这样只要在HTML需要的地方，ng-repeat一下，就可以将该层级所有的类型都展现出来。这可以算作一个content provider。
 
-##四、<sortable-tabset> directive (https://github.com/guanghetv/sortable-tabset)
+##四、sortable-tabset directive (https://github.com/guanghetv/sortable-tabset)
 
 这是一个我自己制作的angular directive,并且将它放在了公司的github账号下面。因为是开源项目，所以其他开发者理论上也可以拿去用的。它的主要功能是一个带有排序功能的侧边导航栏。听起来很简单是吗？对，它的原理确实非常简单，就是将ui-bootstrap(http://angular-ui.github.io/bootstrap/)的tabset控件跟ui-sortable控件进行了结合。ui-bootstrap中的tabset是一个非常方便使用的控件，而且内部的设计非常灵活。这个directive实现了bootstrap原生的tab页切换效果，可以方便的切换横向纵向模式，可以动态绑定每个标签页的模板，所以在课程后台中得到了很多的应用，特别是在课程内容层级的侧边导航栏中。
 
-课程内容的编辑当然需要对资源进行排序。想当然地，我想到了ui-sortable,这个简单，直接将ui-sortable作为attribute添加到需要排序的控件组的parent层级，并绑定ng-model就马上可以实现了。于是我进行了这样的操作，将ui-sortable添加到了<tabset>标签里。然后到前端查看效果，可出现的情况是，当拖拽排序时，整个导航栏被整体拖动了，而不是预期的子元素被拖动排序。打开devtool审查元素，发现ui-sortable这个attr标签出现在了外层的<div>标签里，而不是div里面的<ul>里。这当然不可以了，ui-sortable就是通过识别attr来进行排序的。位置为什么会出错呢？查看tabset源码发现，在它的HTML模板中，ul确实是被嵌入在div中的，也就是说，虽然在使用的时候，<tab>是被直接放在<tabset>下面去ng-repeat的，但是它们被解析之后的DOM结构多了一层div。于是我尝试修改tabset源码，直接在模板的正确位置添加了ui-sortable属性，果然就可以正确排序了。
+课程内容的编辑当然需要对资源进行排序。想当然地，我想到了ui-sortable,这个简单，直接将ui-sortable作为attribute添加到需要排序的控件组的parent层级，并绑定ng-model就马上可以实现了。于是我进行了这样的操作，将ui-sortable添加到了<tabset>标签里。然后到前端查看效果，可出现的情况是，当拖拽排序时，整个导航栏被整体拖动了，而不是预期的子元素被拖动排序。打开devtool审查元素，发现ui-sortable这个attr标签出现在了外层的<div>标签里，而不是div里面的ul里。这当然不可以了，ui-sortable就是通过识别attr来进行排序的。位置为什么会出错呢？查看tabset源码发现，在它的HTML模板中，ul确实是被嵌入在div中的，也就是说，虽然在使用的时候，<tab>是被直接放在<tabset>下面去ng-repeat的，但是它们被解析之后的DOM结构多了一层div。于是我尝试修改tabset源码，直接在模板的正确位置添加了ui-sortable属性，果然就可以正确排序了。
 
 这个自制的directive除了做了上述的事情之外，还将需要排序的数据model作为scope参数供给了外部。这样基本上可以满足多种多样的数据排序需求了。
 
