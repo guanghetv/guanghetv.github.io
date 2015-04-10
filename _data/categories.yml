@@ -1,0 +1,7 @@
+- slug: tech
+  name: Technology
+  color: '#3498db'
+
+- slug: news
+  name: Hacker news
+  color: '#1abc9c'

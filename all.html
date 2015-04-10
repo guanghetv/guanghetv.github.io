@@ -7,13 +7,12 @@ layout: default
   <h1>Posts</h1>
 
   <ul class="posts">
-    {% for post in site.posts limit: 10 %}
+    {% for post in site.posts %}
       <li>
         <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
         <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
       </li>
     {% endfor %}
-    {% if site.posts.size > 10 %}<li><a href="/all.html" class="post-link">更多...</a></li>{% endif %}
   </ul>
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "HTTP API 设计"
-categories: tech
+category: tech
 author: "libook"
 ---
 

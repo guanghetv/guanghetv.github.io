@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "课程后台技术总结"
-categories: tech
+category: tech
 author: "gynsolomon"
 ---    
 

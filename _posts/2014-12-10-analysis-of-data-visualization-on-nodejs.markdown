@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "基于 Nodejs 的数据分析"
+category: tech
 author: song940
 ---
 

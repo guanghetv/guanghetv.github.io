@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Angular 代码优化"
-categories: tech
+category: tech
 author: "YshadowZ"
 ---
 一些老生常谈的注意事项比如文件组织（个人认为这个应该是见仁见智的，只要一个团体形成一个统一的规范就好），单一职责；

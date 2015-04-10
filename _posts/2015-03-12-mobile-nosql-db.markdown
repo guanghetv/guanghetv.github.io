@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "浅谈 NoSql for Android platform"
-categories: android,nosql,realm,couchbase
+category: tech
+tags: android,nosql,realm,couchbase
 author: "killnono"
 ---
 

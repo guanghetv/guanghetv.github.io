@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "关于浏览器缓存和 Nginx 的一些问题"
-categories: tech
+category: tech
 author: "gynsolomon"
 ---
 
