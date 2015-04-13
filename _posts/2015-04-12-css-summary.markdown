@@ -381,7 +381,7 @@ bootstrap是基础，向上是针对网站做的一些reset（即一些属性的
 
 * **眼界大开脑洞：**
 [炫酷的前沿css设计](http://tympanus.net/)
-* **深入学习css**
+* **深入学习css：**
 [关于display](http://www.cnblogs.com/StormSpirit/archive/2012/10/17/2726994.html) 
 [布局](http://zh.learnlayout.com/)
 * **学习sass：** 
