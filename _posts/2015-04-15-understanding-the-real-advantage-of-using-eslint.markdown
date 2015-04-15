@@ -5,7 +5,7 @@ category: news
 author: "ronfe"
 ---
 
-With out project size (and complexity, perhaps) increased along the way, it goes
+With our project size (and complexity, perhaps) increased along the way, it goes
 really in urgent to refactor our code with a set of unique and credible code norm.  
 
 ESLint provides a set of scalable and easy-to-use solutions to it. [This article](http://rangle.io/blog/understanding-the-real-advantages-of-using-eslint/ )
