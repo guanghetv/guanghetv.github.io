@@ -7,7 +7,7 @@ author: "ronfe"
 
 [HPP](https://github.com/analog-nico/hpp ) is an express middleware to protect against HPP, namely HTTP Parameter Pollution attacks.
 
-When receiving a reqeust, Express populates its parameters with the same name in an array.
+When receiving a request, Express populates its parameters with the same name in an array.
 That leaves potential attacking space for hackers. Attackers can intentionally pollute
 request parameters to break the server down by simply repeat query parameters in request.
 That is the basic form of HPP.
