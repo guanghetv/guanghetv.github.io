@@ -5,8 +5,7 @@ category: news
 author: "ronfe"
 ---
 
-[HPP](https://github.com/analog-nico/hpp ) is an express middleware to protect against
-HPP, namely HTTP Parameter Pollution attacks.
+[HPP](https://github.com/analog-nico/hpp ) is an express middleware to protect against HPP, namely HTTP Parameter Pollution attacks.
 
 When receiving a reqeust, Express populates its parameters with the same name in an array.
 That leaves potential attacking space for hackers. Attackers can intentionally pollute
