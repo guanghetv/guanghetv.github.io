@@ -1,6 +1,6 @@
 ---
 layout: post
-    title:  "How to Become A Wizard in Real world(2)"
+title:  "sicp巫师学徒修炼之路(2)"
 category: news
 author: "sl"
 ---
