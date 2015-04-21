@@ -9,7 +9,7 @@ author: "sl"
 
 写于4月16日
 
-**塞尔的四环战斗法师的真实写照**
+**战斗法师**
 
 ![Alt text](/assets/aNewLevel.jpg)
 
