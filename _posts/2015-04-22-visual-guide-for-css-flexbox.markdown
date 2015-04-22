@@ -5,7 +5,7 @@ category: news
 author: "ronfe"
 ---
 
-`flexbox` is a CSS attribute to organize the webpage's layout and responsive compatibility. Here is a visual tutorial from scotch.io that could be referenced.
+`flexbox` is a CSS attribute to organize the webpage's layout and responsive compatibility. [Here](https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties ) is a visual tutorial from scotch.io that could be referenced.
 
 ***
 
