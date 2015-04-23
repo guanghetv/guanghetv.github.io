@@ -25,28 +25,37 @@ MongoDB真的遇到性能瓶颈了吗? 对于查询优化,还可以做到哪些?
 
 ##评估查询性能
 对于性能评估Mongo提供了两个工具:
+
 * explain()   ==>  单个查询评估 
 * MongoDB分析器  ==> 分析神器,它会记录统计信息以及查询执行的细节反馈到system.profile表,可以通过它发现慢查询原因.
+
 其实我们已经发现$group是最慢的,所以应该减少group操作.另外对于不同的集合,应该调整不同的查询策略,或许换一下聚合的顺序就会大大提升查询速度.
 
 ##MongoDB分析器
 * 启用分析器
+
 ```shell
     $mongo
     > use points
     > db.setProfiingLevel(1)
 ```
+
 * 找到执行超过半秒的查询
+
 ```shell
     > db.setProfilingLevel(1,500)
 ```
+
 * 分析级别设置为2,对所有查询启用分析器,汇集的结果到了system.profile
+
 ```shell
     > db.setProfilingLevel(2)
 ```
 
 * 如何分析system.profile的日志
+
 ```shell
     > db.system.profile.find({millis:{$gt:50}}).sort({millis:-1})
 ```
+
 如上,找出了所有耗时50ms以上的查询.
