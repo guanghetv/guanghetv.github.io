@@ -36,14 +36,14 @@ MongoDB真的遇到性能瓶颈了吗? 对于查询优化,还可以做到哪些?
 
 ```shell
     $mongo
-    > use points
-    > db.setProfiingLevel(1)
+     use points
+     db.setProfiingLevel(1)
 ```
 
 * 找到执行超过半秒的查询
 
 ```shell
-    > db.setProfilingLevel(1,500)
+     db.setProfilingLevel(1,500)
 ```
 
 * 分析级别设置为2,对所有查询启用分析器,汇集的结果到了system.profile
