@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "0h h1"
+category: news
+author: "ronfe"
+---
+
+[0h h1](http://0hh1.com/ ) (read as 'Oh hi') is a fantastic logic mini game. Very nice and enjoyable. Just try it!
+
+***
+
+* The game's mechanism is a bit like sudoku, but, just a bit.
+* Time-killer and glia trainer.
