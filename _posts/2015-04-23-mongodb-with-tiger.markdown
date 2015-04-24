@@ -20,3 +20,4 @@ WT支持MM引擎所有特性,但会改变磁盘存储策略,所以需要mongodum
 [YCSB](https://github.com/brianfrankcooper/YCSB)意思是Yahoo!Cloud System Benchmark,该工具可以对各类NoSQL进行性能测试.MongoDB3.0以YCSB测试作官方测试报告.
 在YSCB测试中,Mongo 3.0在多线程批量插入场景下相较于Mongo2.6大约有7倍增长.
 
+哦,对了,WiredTiger如果翻译成中文该叫什么呢?奇虎?
