@@ -1,9 +1,11 @@
 ---
 layout: post
 title:  "some technology about hypervideo"
-category: news
+category: tech
 author: "YshadowZ"
 ---
+
+*****
 
 * [这里](http://html5doctor.com/video-canvas-magic/) 和 [这里](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/PuttingVideoonCanvas/PuttingVideoonCanvas.html) 主要介绍了如何将`<video>`与`<canvas>`组合使用，以及合体后所展现出的更强大的功能。
 * [这里](http://www.qianduan.net/css3-pointer-event-description/) 介绍了一种css3的属性:pointer-events。诺哥所分享的超级交互视频中也使用到了这个属性，主要是保持两个图层既相互独立，有能够是的鼠标能够穿透上面的图层操作下面图层中的内容。
