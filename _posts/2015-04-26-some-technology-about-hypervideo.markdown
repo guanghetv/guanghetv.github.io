@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "some technology about hypervideo"
-category: tech
+category: news
 author: "YshadowZ"
 ---
 
