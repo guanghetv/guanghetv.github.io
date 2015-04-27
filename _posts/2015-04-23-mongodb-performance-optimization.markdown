@@ -7,7 +7,6 @@ author: "diggzhang"
 
 MongoDB真的遇到性能瓶颈了吗? 对于查询优化,还可以做到哪些?
 
---------
 
 ##关于服务器硬件
 * MongoDB使用内存映射文件I/O来访问数据存储,所以受到了OS以及内存大小的限制.64bit的Linux最大虚拟内存地址为128TB,而Windows对内存映射文件的限制为8TB(如果开启日志则只有4TB)
@@ -34,7 +33,7 @@ MongoDB真的遇到性能瓶颈了吗? 对于查询优化,还可以做到哪些?
 ##MongoDB分析器
 * 启用分析器
 
-```shell
+```
     $mongo
      use points
      db.setProfiingLevel(1)
@@ -42,19 +41,19 @@ MongoDB真的遇到性能瓶颈了吗? 对于查询优化,还可以做到哪些?
 
 * 找到执行超过半秒的查询
 
-```shell
+```
      db.setProfilingLevel(1,500)
 ```
 
 * 分析级别设置为2,对所有查询启用分析器,汇集的结果到了system.profile
 
-```shell
+```
     > db.setProfilingLevel(2)
 ```
 
 * 如何分析system.profile的日志
 
-```shell
+```
     > db.system.profile.find({millis:{$gt:50}}).sort({millis:-1})
 ```
 
