@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Airjd.com"
+category: news
+author: "ronfe"
+---
+
+[Airjd.com](http://airjd.com)也许是目前最好用的在线PPT设计制作工具, 主打在线制作有声音的幻灯片.当然,有意思的不是这些,airjd是一个技术PPT资源站,很多前沿分享在这里.
+
+*** 
+
+快速预览:
+* [重构代码修炼之道](http://airjd.com/view/i8uxvq860003lr0#1)
+* [Node.js异步编程](http://airjd.com/view/i8ygju2z000b6kl#1) 
+* [支付宝前端架构的涅磐](http://airjd.com/view/i8gmaghl000pt9e)
