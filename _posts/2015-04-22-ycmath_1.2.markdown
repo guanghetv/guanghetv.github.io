@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "洋葱数学Android V1.2版本总结"  
-categories: android,yamath
+category: tech
 author: "killnono"
 ---
 
