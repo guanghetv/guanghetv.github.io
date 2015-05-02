@@ -13,6 +13,7 @@ author: "diggzhang"
 技术点:
 ***
 * 面部识别API [Face Demo](http://www.projectoxford.ai/demo/face),这帮天才用JSON记录了一张脸的数据.
+
 ```
 "eyeRightBottom": {
     "x": "202.9",
@@ -28,6 +29,7 @@ author: "diggzhang"
     },
 ```
 * 识别面部外,还通过用户访问网站的信息(IP,UA等)以及经纬度,加入算法匹配
+
 ```
 [ {     "event_datetime": "2015-04-27T01:48:41.5852923Z", 
     "user_id": "91539922310b4f468c3f76de08b15416", "session_id": "fbb8b522-6a2b-457b-bc86-62e286045452", 
