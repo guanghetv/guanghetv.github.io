@@ -30,8 +30,6 @@ MongoDB的升级非常简单,大概遵循以下步骤
 ```
 
 ###复制集操作"Not Master"
-mongoose X2 
-monshell
 在复制集升级到MongoDB 3.0后,当我们访问数据库时,执行查询会发现"not master"错误:
 ```
 > show dbs;
