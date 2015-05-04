@@ -31,16 +31,19 @@ MongoDB的升级非常简单,大概遵循以下步骤
 
 ###复制集操作"Not Master"
 在复制集升级到MongoDB 3.0后,当我们访问数据库时,执行查询会发现"not master"错误:
+
 ```
 > show dbs;
 > Error: listDatabases failed:{ "note" : "from execCommand", "ok" : 0, "errmsg" : "not master" }
 
 ```
+
 解决方法,在mongoshell里执行:
 
 ```
 SECONDARY> rs.slaveOk()
 ```
+
 然后便可以进行正常操作.
 
 ###Mongoose
