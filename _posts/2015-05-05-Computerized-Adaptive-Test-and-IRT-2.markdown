@@ -11,9 +11,9 @@ Computerized Adaptive Test (or CAT) successively selects questions for the purpo
 
 To achieve this goal, the basic CAT is an iterative algorithm with following,
 
-# Search the questions pool for the optimal one, based on the current estimate of the examinee's ability
-# Present the chosen question to the examinee, who then answers it correctly or incorrectly
-# Update the estimation based on all prior answers
-# Repeat the step 1-3 using new estimation
+1 Search the questions pool for the optimal one, based on the current estimate of the examinee's ability
+2 Present the chosen question to the examinee, who then answers it correctly or incorrectly
+3 Update the estimation based on all prior answers
+4 Repeat the step 1-3 using new estimation
 
 As a result, different examinees would receive quite different test questions because of different ability estimations. The estimation could be done with Item Response Theory (IRT). IRT is also the preferred methodology for selecting optimal items.
