@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "jQueryMy"
+category: news
+author: "ronfe"
+---
+
+Initially, AngularJS is famous for its two-way data binding mechanism. Now there is a jQuery way to realize, that is [jQuerymy](http://jquerymy.com/ ).
+
+---
+
+* The demo on its website is amazing.
+* Sometimes we hope to AVOID using AngularJS, jQueryMy can be used to enhance the user experiece towards these situations.
+* It is lighter than a frontend frameword to do two-way data binding.
