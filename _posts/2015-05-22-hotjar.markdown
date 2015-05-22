@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "hotJar"
+category: news
+author: "ronfe"
+---
+
+[hotJar](https://www.hotjar.com/ ) is an analytic tool to visualize the user behavior. It's another solution (and better, perhaps) toward point burying for data collecting and analysis. The most amazing effect is its heatmap, like
+
+![Heatmap of hotJar](https://www.hotjar.com/static/img/app-heatmaps.png)
+
+Note, Baidu Analytics can realize heatmap too.
+
+---
+
+* A more direct and lively display of the user behavior
+* Can be used in the user data analysis for product team, but not recommended to use in strict data review.
