@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "tabris.js"
+category: news
+author: "ronfe"
+---
+
+[tabris.js](https://tabrisjs.com/ ) is another tool for javascript developers to build iOS/Android native app. It seems more simple than its counterparts.
+
+---
