@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Four Cool Frontend CSS/JS Effects"
+title:  "Three Cool Frontend CSS/JS Effects"
 category: news
 author: "ronfe"
 ---
