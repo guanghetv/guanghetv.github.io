@@ -7,7 +7,7 @@ author: "libook"
 
 Real-Time video chat solution for WEB browser.
 
-WebRTC is a free, open project that provides browsers and mobile applications with Real-Time Communications (RTC) capabilities via simple APIs. The WebRTC components have been optimized to best serve this purpose. 
+[WebRTC](http://www.webrtc.org/) is a free, open project that provides browsers and mobile applications with Real-Time Communications (RTC) capabilities via simple APIs. The WebRTC components have been optimized to best serve this purpose. 
 
 The WebRTC initiative is a project supported by Google, Mozilla and Opera, amongst others. This page is maintained by the Google Chrome team.
 
