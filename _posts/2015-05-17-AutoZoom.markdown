@@ -7,5 +7,5 @@ author: "libook"
 
 **This is [libook](https://github.com/libook)'s project.**
 
-[AutoZoom](https://github.com/libook/AutoZoom) is a chrome extension can automatically zoom in and scroll. Let me just see the whole area of main content.
+[AutoZoom](https://chrome.google.com/webstore/detail/auto-zoom/eiafhhcnnjnnigicgpfpabacnphimbdi?utm_source=chrome-app-launcher-info-dialog)([Source Code](https://github.com/libook/AutoZoom)) is a chrome extension can automatically zoom in and scroll. Let me just see the whole area of main content.
 
