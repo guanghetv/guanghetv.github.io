@@ -1,7 +1,4 @@
-/**
- * Created by sl on 15/6/11.
- */
----
+ ---
     layout: post
 title:  "vibrant"
 category: news
