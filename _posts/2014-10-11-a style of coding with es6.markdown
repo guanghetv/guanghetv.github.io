@@ -63,6 +63,7 @@ yes, got it!
 
 一下是部分数据平台的留存借口代码
 
+```javascript
 co(function *() {
     result.firstDay = self.count({
         user: {$in: users},
@@ -89,7 +90,7 @@ co(function *() {
 
     return yield result
 })
-
+```
 see it ? result 包含了多个调用数据接口函数，yield 可以保证同步的同时并发执行多个函数，并且以object类型返回结果
 
 那么，并发操作还可以嵌吗？　try it again? 
@@ -104,7 +105,7 @@ DayCache.retentionByDay 就是刚才上面的函数封装，返回了一个gener
 
 数据库的聚合操作利用了　map reduce 模型，同样我们也可以重复利用这类模型，就如同递归的世界，重复自身
 代码节选如下：
-
+```javascript
 userMapList.reduce((a, b) => {
     b.users = b.users.filter(item => a[item] === undefined)
     b.users.forEach(item => a[item] = true)
@@ -115,7 +116,7 @@ userMapList = userMapList.reduce((a, b) => {
     a[b._id] = b.users.length
     return a
 }, {})
-
+```
 这种就是多次聚合操作
 
 var users = results.filter( item => !(item.count == 1 && item.registDate >= startDate) ) // exclude activated users
@@ -126,7 +127,7 @@ var userMap = users.reduce((a, b) => {
 }, {d1:0,d2:0,d3:0,d4:0,d5:0,d6:0,d7:0,d8:0,d9:0,d10:0,d11:0,'d12+':0,allCount:0})
 
 这种是结合过滤进行reduce 操作
-
+```javascript
 userMapList.reduce((a, b) => {
     b.users = b.users.filter(item => a[item] === undefined)
     b.users.forEach(item => a[item] = true)
@@ -140,12 +141,13 @@ userMapList.reduce((a, b) => {
     }
     item.date  = userMap._id
 })
+```
 等等，所以使用Array给我们提供的 filter, map, reduce模型， 基本就可以处理绝大部分数据
 
 nosql 是无关系模型，该如何处理结果之间的关联呢？
 
 代码节选：
-
+```javascript
 var schools = _.hashFullOuterJoin(school.havclass, accessor, school.noclass, accessor)
     .map(item => {
         item.allCount = (item.havclassCount || 0) + (item.noclassCount || 0)
@@ -163,6 +165,7 @@ schools = _.hashLeftOuterJoin(schools, accessor, schools1, accessor)
     return item}).slice(0, req.body.limit)
 
 res.json({result: schools})
+```
 
 可以看到　hashFullOuterJoin，　hashLeftOuterJoin　就是关系数据库的链表操作，这里模拟了这种关系型数据库各种join操作，
 以达到组合数据的目的，　
