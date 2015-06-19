@@ -218,16 +218,15 @@ res.json({result: schools})
 一定要了解下　Lambda演算，对程式设计有很多启发，　《the little scheme》是个不错的选择，丁丁的ｓｉｃｐ 也行
 
 6 - tip
-```javascript
-just do one thing per function
-As little as possible nesting level
-Process oriented programming fist, oop second, don't oo too earlier, y'll not see the whole scence.
-like write scripts, refactor step by step...
-UML - thinking of data flow -> clear data model(data structure) & whole image in mind (第五项修炼, 系统思考)
-naming　style - very importaint
-less third party module, unless y're familier its source code
-must add semicolon before (, [, +, -, / if y decide not use semicolon....
-```
+
+1. just do one thing per function
+2. As little as possible nesting level
+3. Process oriented programming fist, oop second, don't oo too earlier, y'll not see the whole scence.
+4. like write scripts, refactor step by step...
+5. UML - thinking of data flow -> clear data model(data structure) & whole image in mind (第五项修炼, 系统思考)
+6. naming　style - very importaint
+7. less third party module, unless y're familier its source code
+8. must add semicolon before (, [, +, -, / if y decide not use semicolon....
 
 7 - if we responsible of ourself code -> less code, more Elegant, get more free time to do y love
 
