@@ -227,7 +227,7 @@ UML - thinking of data flow -> clear data model(data structure) & whole image in
 naming　style - very importaint
 less third party module, unless y're familier its source code
 must add semicolon before (, [, +, -, / if y decide not use semicolon....
-```javascript
+```
 
 7 - if we responsible of ourself code -> less code, more Elegant, get more free time to do y love
 
