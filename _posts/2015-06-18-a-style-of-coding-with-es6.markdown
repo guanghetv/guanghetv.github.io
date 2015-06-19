@@ -151,16 +151,18 @@ userMapList = userMapList.reduce((a, b) => {
     return a
 }, {})
 ```
-这种就是多次聚合操作
+这种是重复聚合操作，类似mongo的连续２个group管道操作
 
+```javascript
 var users = results.filter( item => !(item.count == 1 && item.registDate >= startDate) ) // exclude activated users
 var userMap = users.reduce((a, b) => {
     ++a[ (b.count >= 12) ? 'd12+' : 'd'+ b.count ]
     a.allCount += b.count
     return a
 }, {d1:0,d2:0,d3:0,d4:0,d5:0,d6:0,d7:0,d8:0,d9:0,d10:0,d11:0,'d12+':0,allCount:0})
+```
 
-这种是结合过滤进行reduce 操作
+结合过滤管道进行reduce 操作
 ```javascript
 userMapList.reduce((a, b) => {
     b.users = b.users.filter(item => a[item] === undefined)
@@ -176,11 +178,12 @@ userMapList.reduce((a, b) => {
     item.date  = userMap._id
 })
 ```
-等等，所以使用Array给我们提供的 filter, map, reduce模型， 基本就可以处理绝大部分数据
+标准map reduce 操作
+等等，所以使用Array给我们提供的 filter, map, reduce模型， 基本就可以处理绝大部分数据操作
 
 nosql 是无关系模型，该如何处理结果之间的关联呢？
 
-代码节选：
+数据平台代码节选：
 ```javascript
 var schools = _.hashFullOuterJoin(school.havclass, accessor, school.noclass, accessor)
     .map(item => {
@@ -201,30 +204,30 @@ schools = _.hashLeftOuterJoin(schools, accessor, schools1, accessor)
 res.json({result: schools})
 ```
 
-可以看到　hashFullOuterJoin，　hashLeftOuterJoin　就是关系数据库的链表操作，这里模拟了这种关系型数据库各种join操作，
-以达到组合数据的目的，　
+可以看到　hashFullOuterJoin，　hashLeftOuterJoin　就是关系数据库的多表操作，这里模拟了这种关系型数据库各种join操作，
+以达到组合数据的目的，　这里想到　postgresql正式结合了两者的优点
 
 4. debug
 
 关于调试，从generator,我们所有的异常都会被汇到　catch处理函数，不需要在各处回调判断，而且，还可以抛出自定义异常，
-或者使用标准　try catch　捕获异常，防止程序意外崩溃
+或者使用标准　try catch　捕获异常，防止程序意外崩溃，让程序专心处理业务逻辑
 
 5.parallel universe
 到这里，已经联想到李狗蛋的平行宇宙理论，所有时间在同一水平上并发执行，通过虫洞(yield) 来互相通信，oh yeah!
-当然，代码中充斥着　arrow function等额外的　es6特性，大家就自行阅读了，关于arrow function，也就是　Lambda　表达式，
+当然，代码中充斥着　arrow function等额外的　es6特性，大家就自行阅读了，关于arrow function，核心还是　Lambda　表达式，
 一定要了解下　Lambda演算，对程式设计有很多启发，　《the little scheme》是个不错的选择，丁丁的ｓｉｃｐ 也行
 
 6. tip
 just do one thing per function
 As little as possible nesting level
-process fist, oo second, don't oo too earlier, y'll not see the whole scence.
+Process oriented programming fist, oop second, don't oo too earlier, y'll not see the whole scence.
 like write scripts, refactor step by step...
-UML - thinking of data flow -> clear data model(data structure) image in mind (第五项修炼, 系统思考)
-naming　style
+UML - thinking of data flow -> clear data model(data structure) & whole image in mind (第五项修炼, 系统思考)
+naming　style - very importaint
 less third party module, unless y're familier its source code
 must add semicolon before (, [, +, -, / if y decide not use semicolon....
 
-7. less code, get more free time
+7. if we responsible of ourself code -> less code, more Elegant, get more free time to do y love
 
 8. 看清问题的根源和因果关系，最终消灭问题
 
