@@ -163,6 +163,7 @@ var userMap = users.reduce((a, b) => {
 ```
 
 结合过滤管道进行reduce 操作
+
 ```javascript
 userMapList.reduce((a, b) => {
     b.users = b.users.filter(item => a[item] === undefined)
@@ -178,12 +179,14 @@ userMapList.reduce((a, b) => {
     item.date  = userMap._id
 })
 ```
+
 标准map reduce 操作
 等等，所以使用Array给我们提供的 filter, map, reduce模型， 基本就可以处理绝大部分数据操作
 
 nosql 是无关系模型，该如何处理结果之间的关联呢？
 
 数据平台代码节选：
+
 ```javascript
 var schools = _.hashFullOuterJoin(school.havclass, accessor, school.noclass, accessor)
     .map(item => {
