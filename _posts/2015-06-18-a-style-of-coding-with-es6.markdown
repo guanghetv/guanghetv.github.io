@@ -135,7 +135,7 @@ var results = yield generators;
 （　⊙ｏ⊙　）哇,yield　还可以返回generator的结果
 ，，所以，从这里可以看出，理论上可以用yield写出任何层次的同步＋异步代码的组合，而且还事扁平化
 
-3. map reduce filter join
+3 - map reduce filter join
 
 数据库的聚合操作利用了　map reduce 模型，同样我们也可以重复利用这类模型，就如同递归的世界，重复自身
 代码节选如下：
@@ -207,17 +207,17 @@ res.json({result: schools})
 可以看到　hashFullOuterJoin，　hashLeftOuterJoin　就是关系数据库的多表操作，这里模拟了这种关系型数据库各种join操作，
 以达到组合数据的目的，　这里想到　postgresql正式结合了两者的优点
 
-4. debug
+4 - debug
 
 关于调试，从generator,我们所有的异常都会被汇到　catch处理函数，不需要在各处回调判断，而且，还可以抛出自定义异常，
 或者使用标准　try catch　捕获异常，防止程序意外崩溃，让程序专心处理业务逻辑
 
-5.parallel universe
+5 - parallel universe
 到这里，已经联想到李狗蛋的平行宇宙理论，所有时间在同一水平上并发执行，通过虫洞(yield) 来互相通信，oh yeah!
 当然，代码中充斥着　arrow function等额外的　es6特性，大家就自行阅读了，关于arrow function，核心还是　Lambda　表达式，
 一定要了解下　Lambda演算，对程式设计有很多启发，　《the little scheme》是个不错的选择，丁丁的ｓｉｃｐ 也行
 
-6. tip
+6 - tip
 just do one thing per function
 As little as possible nesting level
 Process oriented programming fist, oop second, don't oo too earlier, y'll not see the whole scence.
@@ -227,11 +227,11 @@ naming　style - very importaint
 less third party module, unless y're familier its source code
 must add semicolon before (, [, +, -, / if y decide not use semicolon....
 
-7. if we responsible of ourself code -> less code, more Elegant, get more free time to do y love
+7 - if we responsible of ourself code -> less code, more Elegant, get more free time to do y love
 
-8. 看清问题的根源和因果关系，最终消灭问题
+8 - 看清问题的根源和因果关系，最终消灭问题
 
-9. small is beautiful
+9 - small is beautiful
 
 美，能做的事越多，代码量却越少，他必须完美把握住事物的本质，否则就会有许多无法修补的特例。在修改代码的时候，你必须用
 心灵之眼看见代码背后表达的事物，他们不怎么用调试器，只是用眼睛看着代码，然后闭上眼，脑海里浮现出其中信的流动，所以他们经常一动手就能改到
