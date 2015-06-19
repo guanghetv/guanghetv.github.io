@@ -96,8 +96,30 @@ see it ? result 包含了多个调用数据接口函数，yield 可以保证同�
 
 那么，并发操作还可以嵌吗？　try it again? 
 
-var generators = userMapList.map(item => DayCache.retentionByDay(item._id, item.users));
+```javascript
+var generator = co.wrap(function *(id, users) {
+    result.firstDay = self.count({
+        user: {$in: users},
+        createdBy: date,
+        events: {
+            $in: [Event.ejectFinishElementary,
+            Event.ejectFinishAdvanced,
+            Event.finishChallenge]
+        }
+    });
+
+    result.nextDay = self.count({
+        user: {$in: users},
+        createdBy: moment(date).add(1, 'days').format('YYYY-MM-DD')
+    })
+
+    return yield result
+})(id, users)
+
+var generators = userMapList.map(item => generator(item._id, item.users));
 var results = yield generators;
+
+```
 
 DayCache.retentionByDay 就是刚才上面的函数封装，返回了一个generator 函数，（　⊙ｏ⊙　）哇,yield　还可以返回generator的结果
 ，，所以，从这里可以看出，理论上可以用yield写出任何层次的同步＋异步代码的组合，而且还事扁平化
