@@ -5,7 +5,7 @@ category: tech
 author: "link"
 ---
 
-1. promise
+1 - promise
 
 ```javascript
 when.promise(function(resolve, reject) {
@@ -43,7 +43,7 @@ when.promise(function(resolve, reject) {
     });
 ```
 
- 2. generator
+ 2 - generator
 
 但还可以优化吗？可以让我们的访问数据库结果在一个上下文空间吗？让我们用se6的generator进行尝试
 
