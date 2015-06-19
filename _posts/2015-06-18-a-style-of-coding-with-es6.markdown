@@ -116,12 +116,23 @@ var generator = co.wrap(function *(id, users) {
     return yield result
 })(id, users)
 
-var generators = userMapList.map(item => generator(item._id, item.users));
+var generator1 = co.wrap(function *(id, users) {
+    var results = yield self.distinct('user', { // 7 days range
+        user: {$in: users},
+        createdBy: {
+            $gte: moment(date).add(1, 'days').format('YYYY-MM-DD'),
+            $lte: moment(date).add(7, 'days').format('YYYY-MM-DD')
+        }
+    })
+
+    return results
+})(id, users)
+
+var generators = [generator(item._id, item.users), generator1(item._id, item.users)]
 var results = yield generators;
 
 ```
-
-DayCache.retentionByDay 就是刚才上面的函数封装，返回了一个generator 函数，（　⊙ｏ⊙　）哇,yield　还可以返回generator的结果
+（　⊙ｏ⊙　）哇,yield　还可以返回generator的结果
 ，，所以，从这里可以看出，理论上可以用yield写出任何层次的同步＋异步代码的组合，而且还事扁平化
 
 3. map reduce filter join
