@@ -139,6 +139,7 @@ var results = yield generators;
 
 数据库的聚合操作利用了　map reduce 模型，同样我们也可以重复利用这类模型，就如同递归的世界，重复自身
 代码节选如下：
+
 ```javascript
 userMapList.reduce((a, b) => {
     b.users = b.users.filter(item => a[item] === undefined)
@@ -151,6 +152,7 @@ userMapList = userMapList.reduce((a, b) => {
     return a
 }, {})
 ```
+
 这种是重复聚合操作，类似mongo的连续２个group管道操作
 
 ```javascript
