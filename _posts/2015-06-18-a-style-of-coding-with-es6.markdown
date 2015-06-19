@@ -47,6 +47,7 @@ when.promise(function(resolve, reject) {
 
 但还可以优化吗？可以让我们的访问数据库结果在一个上下文空间吗？让我们用se6的generator进行尝试
 
+```javascript
 co(function *() {
     var chapter = yield Chapter.create(req.body.chapter)
     if(!req.courseVersion) return chapter;
@@ -56,7 +57,7 @@ co(function *() {
 }).catch(function(err) {
     res.status(500).send(err);
 });
-
+```
 yes, got it!
 
 那么可以相同的方实异步调用吗？ try it
