@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A style of coding with es6"
+title:  "A Style of Coding with ES6"
 category: tech
 author: "link"
 ---
