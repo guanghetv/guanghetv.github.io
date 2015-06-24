@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "BEO"总结
+title: "BEO总结"
 category: tech
 author: ronfe
 ---
