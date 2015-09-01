@@ -1,9 +1,9 @@
-------
+---
 layout: post
 title: "Code Style Matters"
 category: news
-author: "Centsent"
-------
+author: "centsent"
+---
 
 ## **Why does it matters?**
 
