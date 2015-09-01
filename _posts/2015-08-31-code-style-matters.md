@@ -1,12 +1,9 @@
 ------
-
 layout: post
-
-title: Code Style Matters
-
+title: "Code Style Matters"
+category: news
+author: "Centsent"
 ------
-
-
 
 ## **Why does it matters?**
 
