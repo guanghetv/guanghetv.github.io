@@ -1,0 +1,22 @@
+---
+layout: post
+title:  "团队沟通工具瀑布IM"
+category: news
+author: "diggzhang"
+---
+
+瀑布IM是一款跨平台的，高效的，团队沟通工具。
+
+瀑布可以接入Evernote,Jenkins,Teambition,Aliyun,Github...总之主流的效率工具都可以集成。
+
+真正的跨平台，包括Linux客户端。
+
+支持屏幕截图、文件共享、智能通知、**代码片段共享**...
+
+还可以收到苹果 App Store 指定应用的评价更新提醒。
+
+还有有趣高效的Command Line模式，个性定制workflow。
+
+同样也是基于node技术栈。
+
+[瀑布IM](https://beta.pubu.im)，让团队沟通再简单一点。
