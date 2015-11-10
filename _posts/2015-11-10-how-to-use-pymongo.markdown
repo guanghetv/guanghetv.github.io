@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to use Pymongo"
-category: blog 
+category: tech 
 author: "diggzhang"
 ---
 
