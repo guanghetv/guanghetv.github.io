@@ -2,9 +2,9 @@
 layout: default
 ---
 
-<div class="home">
+<div class="home category-page">
 
-    <h5 class="category">{{ page.category }}</h5>
+    <h1 style='text-transform:capitalize' class="category">{{ page.category }}</h1>
     {% if site.categories[page.category] %}
     <ul class="posts">
         {% for post in site.categories[page.category] %}
