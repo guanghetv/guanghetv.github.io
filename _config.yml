@@ -2,7 +2,7 @@
 title:              Guanghe
 email:              dev@guanghe.tv
 description:        "光合新知开发者博客"
-baseurl:            /
+baseurl:            ""
 url:                "http://dev.guanghe.tv"
 twitter_username:   guanghetv
 github:
