@@ -1,0 +1,24 @@
+## Something about Cordova
+最近公司因为业务需要尝试在移动端引入Cordova采用web来开发一些HTML5页面，其中包含一些交互比较多的页面，而交互是HTML在移动端开发的弱势，没有Native那么流畅，而且还要兼容一些低端的设备，面对这些挑战我做了一些尝试，比如用famo.us来开发等。
+
+## Tools
+	
+### Debug
+
+1. [**GapDebug**](http://www.genuitec.com/products/gapdebug/):比较强大的调试工具，但是你需要一个比较“现代”的浏览器，或者使用crosswalk;
+2. [**Weinre**](http://people.apache.org/~pmuellr/weinre-docs/latest/):一个远程调试工具，支持比较旧的设备;
+
+### Develop
+1. [**cordova-plugin-browsersync**](https://github.com/nparashuram/cordova-plugin-browsersync):支持设备livereload，原理是启动一个http-server,使得本地js，css文件请求http-server;
+
+
+## Framework
+1. [**Famo.us**](http://famous.org/):开始我尝试使用Famo.us去开发，因为famo.us有自己的render engine，可以把逻辑放到每一帧里，在移动端可以达到很好的流畅度，而且可以精确的控制每个node的动画效果，从而带来native的体验。但是CPU使用率比较高，有一些UI上的BUG，而且社区支持不足，famo.us本身已经转型做[**Famous Micro-App CMS**](	http://famous.co/)，我觉得风险太大，暂缓使用;
+2. Web Native: 这是我最终的决定[**Vanilla.js**](http://vanilla-js.com/);
+
+## Others
+后续会继续研究famo.us这里有一些famo.us的Demo，[periodic402](http://disrupt.famo.us/periodic402/), [keyboard](https://famo.us/blog/demo-mixed-mode-magic-keyboard/)
+
+
+
+	
