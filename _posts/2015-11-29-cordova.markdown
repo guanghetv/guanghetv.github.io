@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Something about Cordova"
+category: tech 
+author: "barlowluo"
+---
+
 ## Something about Cordova
 最近公司因为业务需要尝试在移动端引入Cordova采用web来开发一些HTML5页面，其中包含一些交互比较多的页面，而交互是HTML在移动端开发的弱势，没有Native那么流畅，而且还要兼容一些低端的设备，面对这些挑战我做了一些尝试，比如用famo.us来开发等。
 
