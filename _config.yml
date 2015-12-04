@@ -7,6 +7,8 @@ url:                "http://dev.guanghe.tv"
 twitter_username:   guanghetv
 github:
   repo:             https://github.com/guanghetv
+  bookshelf:        https://github.com/guanghetv/books/wiki
+lagou:              http://www.lagou.com/gongsi/5706.html
 paginate:           5
 
 

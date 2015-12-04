@@ -1,0 +1,6 @@
+{
+  "directory" : "js/vendor",
+  "json"      : "bower.json",
+  "searchpath"  : "",
+  "shorthand_resolver" : ""
+}
