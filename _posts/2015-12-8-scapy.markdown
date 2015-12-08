@@ -1,0 +1,46 @@
+---
+layout: post
+title:  "scapy与路由轨迹图"
+category: news
+author: "diggzhang"
+---
+
+通过路由轨迹图，可以帮助我们分析从端到服务器一路中经过的各个节点信息，从而是排查究竟是哪些因素导致网站访问故障。
+
+用到的工具是`scapy`，该神器属于典型的强到没朋友。提供了众多网络数据包操作方法，可以发包`send()`，`SYN\ACK`扫描，嗅探`sniff()`,TCP路由跟踪`traceroute()`。
+
+我们使用`traceroute()`实现一个路由跟踪程序，并搭配相应包生成一张route map。
+
+
+
+```
+# 允许utf8字符集
+# -*- coding: utf-8 -*-
+
+# subprocess调用系统内的工具
+import os,sys,time,subprocess
+import warnings,logging
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+from scapy.all import traceroute
+
+domains = raw_input('input domain name or IP :')
+target = domains.split(' ')
+dport = [80]
+
+if len(target) >= 1 and target[0] != '':
+	 # 	启动路由跟踪
+    res, unans = traceroute(target, dport=dport, retry=-2)
+    # traceroute生成的信息绘制成svg
+    res.graph(target="> test.svg")
+    time.sleep(1)
+    # svg 转格式为 png
+    subprocess.Popen("/usr/local/bin/convert test.svg test.png", shell=True)
+else:
+    print "IP/domain number of errors, exit"
+
+```
+
+最终实现效果图
+
+![routemap](http://i12.tietuku.com/b9bf6db38df3c3dc.png)
