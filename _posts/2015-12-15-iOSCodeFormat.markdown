@@ -1,8 +1,7 @@
-S code format
 ---
 layout: post
 title:  "iOS代码规范-基础部分"
-category: tech 
+category: news
 author: "jichengsun"
 ---
 
