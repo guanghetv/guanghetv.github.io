@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "iOS代码规范-基础部分"
-category: news
+category: tech
 author: "jichengsun"
 ---
 
