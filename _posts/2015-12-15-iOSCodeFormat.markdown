@@ -1,10 +1,11 @@
+S code format
 ---
 layout: post
-title:  "iOS code format"
+title:  "iOS代码规范-基础部分"
 category: tech 
 author: "jichengsun"
 ---
-#iOS代码规范-基础部分
+
 这是一份基础规范，主要目的在于统一代码规范，便于多人开发代码可读性以及维护性。考虑到未来会接入swift，在此选取了适用swift语言的部分，并且摘除了不适用的部分。
 
 * [命名](#命名)
