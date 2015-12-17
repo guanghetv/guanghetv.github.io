@@ -4,12 +4,37 @@ title:  "Xcode Debug技巧"
 category: tech
 author: "jichengsun"
 ---
+  * [开发过程中](#开发过程中)
+    * [基本调试工具介绍](#基本调试工具介绍)
+    * [BreakPoint](#BreakPoint)
+      * [Enable NSZombie Objects（开启僵尸对象）](#Enable NSZombie Objects（开启僵尸对象）)
+      * [对于所有异常添加Global BreakPoint（全局断点)](#对于所有异常添加Global BreakPoint（全局断点))
+      * [Condational Breakpoints（条件断点）](#Condational Breakpoints（条件断点）)
+      * [unrecognized selector send to instancd 快速定位](#unrecognized selector send to instancd 快速定位)
+      * [Address Sanitizer](#Address Sanitizer)
+    * [UI Debug](#UIDebug)
+    * [LLDB调试基本命令](#LLDB调试基本命令)
+      * [p和po](#p和po)
+      * [expr](#expr)
+      * [call](#call)
+      * [bt](#bt)
+      * [image](#image)
+      * [BreakPoint](#BreakPoint)
+  * [应用发布后崩溃收集](#应用发布后崩溃收集)
+    * [Xcode自带线上应用崩溃日志](#Xcode自带线上应用崩溃日志)
+    * [根据crash崩溃报告的内存地址定位到代码位置](#根据crash崩溃报告的内存地址定位到代码位置)
+    * [Umeng Debug Tool](#Umeng Debug Tool)
+    * [Apple一些关于Debug的官方文档](#Apple一些关于Debug的官方文档)
+
+
+
+
 ##开发过程中
 ###基本调试工具介绍
 
 [Debugging Tools](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/debugging_with_xcode/chapters/debugging_tools.html#//apple_ref/doc/uid/TP40015022-CH8-SW1)
 
-###UI Debug
+###UIDebug
 
 [Debugging with Xcode](https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/debugging_with_xcode/chapters/special_debugging_workflows.html#//apple_ref/doc/uid/TP40015022-CH9-SW1)
 
@@ -37,7 +62,7 @@ Enable NSZombie Objects可能是整个Xcode开发环境中最有用的调试技�
 -[NSObject(NSObject) doesNotRecognizeSelector:] 
 ```
 
-####Address Sanitizer:
+####Address Sanitizer
 **EXC_BAD_ACCESS**一直是很多开发者的噩梦，因为这个错误很不直观，出现后往往要花很长时间才能定位到错误。苹果这次带来了革命性的提升。
 
 在项目的**Scheme**中**Diagnostics**下，选中**enable address sanitizer**
@@ -46,7 +71,7 @@ Enable NSZombie Objects可能是整个Xcode开发环境中最有用的调试技�
 ###LLDB调试基本命令
 [LLDB命令大全](http://lldb.llvm.org/lldb-gdb.html)
 
-#### p和po
+####p和po
 **在调试器中最常用到的命令是p（用于输出基本类型）或者po（用于输出 Objective-C 对象）。**
 
 如下，你可以通过输入po 和 view 来输出 view 的信息:
@@ -176,7 +201,7 @@ Summary: ControlStyleDemo`-[RootViewController viewDidLoad] + 312 at RootViewCon
 在Xcode中查看具体崩溃信息
 在**Xcode**中菜单的**Window**下选择**Organizer**,在打开的窗口中选择**Crashes**，这样Xcode会开始下载相关的崩溃信息到本地中，可以在左侧的窗口中切换线上版本，点击右侧**Open in Project**能直接定位到代码。
 
-###iOS 根据 crash 崩溃 报告的内存地址定位到代码位置
+###根据crash崩溃报告的内存地址定位到代码位置
 [Understanding and Analyzing iOS Application Crash Reports](https://developer.apple.com/library/ios/technotes/tn2151/_index.html)
 
 1，首先要有崩溃的app上传时候的打包文件，也就是 .xcarchive文件。这个文件可以通过以下方法找到，点击Xcode右上角的Organizer，然后点击Organizer上面的Archives,就可以看到下面有个列表，列出的都是打包的文件，其中一个就是你打包时候留下的，找到它。找到后点击右键显示包内容，看到dSYMs文件和Products文件夹 。先打开dSYMs文件夹，看到yourapp.app.dSYM文件，为了方便，把它复制到桌面。然后回去打开Products文件夹看到Applications文件夹，打开之，然后看到了你的app,同样把他复制到桌面。到这里准备工作完成
