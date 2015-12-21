@@ -40,7 +40,7 @@ author: "jichengsun"
 
 ####摘自： [中文连接](https://github.com/jichengsun/objc-zen-book-cn/blob/master/README.md) [英文连接](https://github.com/objc-zen/objc-zen-book)
          
-####[Apple官方文档]https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE
+####[Apple官方文档](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE)
 
 ##通用的约定
 尽可能遵守 Apple 的命名约定，尤其是和 内存管理规则 (NARC) 相关的地方。
