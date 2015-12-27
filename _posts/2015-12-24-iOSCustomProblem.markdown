@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "iOS开发常见问题"
+category: tech
+author: "jichengsun"
+---
+
 #线程异步问题
 ###tableview reloadData 
   
