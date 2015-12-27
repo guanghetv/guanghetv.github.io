@@ -63,6 +63,8 @@ Enable NSZombie Objects可能是整个Xcode开发环境中最有用的调试技�
 ```
 
 ####Address Sanitizer
+**Warning:真机调试开启此环境变量，在离开调试环境应用会无法启动，闪退（xcode7.1）**
+
 **EXC_BAD_ACCESS**一直是很多开发者的噩梦，因为这个错误很不直观，出现后往往要花很长时间才能定位到错误。苹果这次带来了革命性的提升。
 
 在项目的**Scheme**中**Diagnostics**下，选中**enable address sanitizer**

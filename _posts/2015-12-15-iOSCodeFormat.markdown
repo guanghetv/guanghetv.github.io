@@ -497,6 +497,8 @@ Class clusters 在 Apple 的Framework 中广泛使用：一些明显的例子比
 
 属性应该尽可能描述性地命名，避免缩写，并且是小写字母开头的驼峰命名。我们的工具可以很方便地帮我们自动补全所有东西（嗯。。几乎所有的，Xcode 的Derived Data 会索引这些命名）。所以没理由少打几个字符了，并且最好尽可能在你源码里表达更多东西。
 
+**尽量直接使用属性，除非你需要在合成的存取器中加入特殊逻辑[例如](https://github.com/facebook/facebook-ios-sdk/blob/master/FBSDKShareKit/FBSDKShareKit/FBSDKLikeButton.m)**
+
 **例子 :**
 
 ```objective-c
