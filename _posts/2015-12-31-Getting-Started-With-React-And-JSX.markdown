@@ -5,8 +5,6 @@ category: tech
 author: "yinxin630"
 ---
 
-# React和JSX入门指导
-
 标签：React JSX
 
 ---

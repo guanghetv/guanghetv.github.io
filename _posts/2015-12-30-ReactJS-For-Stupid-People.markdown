@@ -5,8 +5,6 @@ category: tech
 author: "yinxin630"
 ---
 
-#ReactJS 懒人教程
-
 原文：[查看原文][1]  
 翻译：[碎碎酱][2]
 
