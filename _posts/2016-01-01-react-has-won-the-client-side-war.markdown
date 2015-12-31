@@ -1,7 +1,7 @@
 ---
 layout: post  
 title:  "忘记Angular和Ember吧，React早已在前端大战中胜出"  
-category: tech  
+category: news  
 author: "yinxin630"
 ---
 
