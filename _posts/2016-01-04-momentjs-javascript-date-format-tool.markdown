@@ -1,7 +1,8 @@
-# Node.js时间格式化工具 - Moment.js
-
-标签： Node.js
-
+---
+layout: post  
+title:  "Node.js时间格式化工具 - Moment.js"  
+category: news  
+author: "yinxin630"
 ---
 
 作者：[碎碎酱][1]
