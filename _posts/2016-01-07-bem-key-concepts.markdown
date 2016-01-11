@@ -115,6 +115,7 @@ header
 使用XML和[BEMJSON][12]来表示：
 
 XML
+
 ```
 <block:header>
     <block:logo/>
@@ -127,6 +128,7 @@ XML
 ```
 
 BEMJSON
+
 ```
 {
     block: 'header',
