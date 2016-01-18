@@ -1,7 +1,8 @@
-# Commit Message 编写指南
-
-标签（空格分隔）： git
-
+---
+layout: post  
+title:  "Commit Message 编写指南"  
+category: news  
+author: "yinxin630"
 ---
 
 作者：[碎碎酱][1]
