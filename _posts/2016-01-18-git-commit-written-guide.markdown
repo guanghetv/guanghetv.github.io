@@ -16,11 +16,12 @@ author: "yinxin630"
 
 普通的范式：
 
-![](../assets/images/git-commit-guide/git-commit-guide-001.png)
+<!-- 博客中实际相对路径 -->
+![](/assets/images/git-commit-guide/git-commit-guide-001.png)
 
 良好的范式：
 
-![](../assets/images/git-commit-guide/git-commit-guide-002.png)
+![](/assets/images/git-commit-guide/git-commit-guide-002.png)
 
 ## Commit Message 格式
 
