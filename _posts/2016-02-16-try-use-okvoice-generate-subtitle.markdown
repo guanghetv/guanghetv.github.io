@@ -64,7 +64,7 @@ http://api.okvoice.com/asr/api?apiKey=a0764790135a124cdd9a91e47a8e22c6&expires=1
 测试视频为负数那一节，测试结果图：
 ![](/assets/resource/try-okvoice/okvoice.png)
 
-生成的SRT字幕文件：[字幕文件](/assets/resource/try-okvoice/example.srt)
+生成的SRT字幕文件：[字幕文件](/assets/resource/try-okvoice/example.txt)
 
 ## 综合结论
 
