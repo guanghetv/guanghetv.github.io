@@ -61,7 +61,7 @@ http://api.okvoice.com/asr/api?apiKey=a0764790135a124cdd9a91e47a8e22c6&expires=1
 
 [字幕大师][3]提供了直接将视频提取出字幕的服务，[收费价格][4]为按视频时长每1小时40元。软件为Windows系统应用，在xp虚拟机中安装上应用，注册应用帐号，默认包含20元余额可用于测试。
 
-测试视频为负数那一届，测试结果图：
+测试视频为负数那一节，测试结果图：
 ![](/assets/resource/try-okvoice/okvoice.png)
 
 生成的SRT字幕文件：[字幕文件](/assets/resource/try-okvoice/example.srt)
