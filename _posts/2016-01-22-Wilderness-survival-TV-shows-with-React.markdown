@@ -107,8 +107,3 @@ immutable-js的[实现](https://en.wikipedia.org/wiki/Persistent_data_structure)
 
 #结语
 总的来说这篇文章并不是教你如何写出一个Demo，而是分享我在开发时的经验，希望这些经验在你开发时带给你灵感。
-
-
-
-
-
