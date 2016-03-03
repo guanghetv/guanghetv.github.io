@@ -1,7 +1,7 @@
 ---
 layout: post  
 title:  "React 荒野求生指南"  
-category: Tech  
+category: tech  
 author: "lvBingo"
 ---
 

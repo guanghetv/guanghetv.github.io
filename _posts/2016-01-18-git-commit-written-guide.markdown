@@ -10,7 +10,7 @@ author: "yinxin630"
 参考文档：
 [《Commit message 和 Change log 编写指南》][2]
 
-我们在每次提交代码时，都需要编写Commit Message，否则是不运行提交的。
+我们在每次提交代码时，都需要编写Commit Message，否则是不允许提交的。
 `git commit -m "hello world"`
 编写Commit Message需要遵循一定的范式，内容应该清晰明了，指明本次提交的目的，便于日后追踪问题。
 
