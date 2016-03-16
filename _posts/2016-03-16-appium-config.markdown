@@ -2,7 +2,7 @@
 layout: post
 title:  "Mac环境下如何配置Appium"
 category: tech
-autor: "lucien"
+author: "lucien"
 ---
 
 
