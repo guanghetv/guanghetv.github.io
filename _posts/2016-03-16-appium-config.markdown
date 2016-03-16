@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "Mac环境下如何配置Appium"
+title:  "Mac环境下如何配置Appium"
 category: tech
-author："lucien"
+autor: "lucien"
 ---
+
+
 #一：下载（appium-1.4.13.dmg）
 地址（1）<https://github.com/appium/appium/releases>
 

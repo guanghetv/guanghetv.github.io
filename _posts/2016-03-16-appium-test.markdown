@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "Appium+Eclipse编写测试用例"
+title:  "Appium+Eclipse编写测试用例"
 category: tech
 autor: "lucien"
 ---
+
 
 #一:环境准备好.
 *详情见第一篇文章(Mac环境下如何配置Appium环境.*
