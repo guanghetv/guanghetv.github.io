@@ -377,6 +377,12 @@ tbody tr:nth-child(odd) th {
   color: inherit;
 }
 
+.sign {
+  display: inline;
+  margin: 0 0 0 0;
+  float: right;
+}
+
 
 /*
  * Pagination
