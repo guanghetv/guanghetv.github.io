@@ -1,80 +1,88 @@
 /* Site header */
 
 .category-page .site-header {
-  border-top: 5px solid #333;
-  border-bottom: 1px solid #e8e8e8;
-  min-height: 56px;
-  background-color: white;
+    border-top: 5px solid #333;
+    border-bottom: 1px solid #e8e8e8;
+    min-height: 56px;
+    background-color: white;
 }
 
 .category-page .site-title,
 .category-page .site-title:hover,
 .category-page .site-title:visited {
-  display: block;
-  color: #333;
-  font-size: 26px;
-  letter-spacing: -1px;
-  float: left;
-  line-height: 56px;
-  position: relative;
-  z-index: 1;
+    display: block;
+    color: #333;
+    font-size: 26px;
+    letter-spacing: -1px;
+    float: left;
+    line-height: 56px;
+    position: relative;
+    z-index: 1;
 }
 
 .category-page .site-nav {
-  float: right;
-  line-height: 56px;
+    float: right;
+    line-height: 56px;
 }
 
-.category-page .site-nav .menu-icon { display: none; }
+.category-page .site-nav .menu-icon {
+    display: none;
+}
 
 .category-page .site-nav .page-link {
-  margin-left: 20px;
-  color: #727272;
-  letter-spacing: -.5px;
+    margin-left: 20px;
+    color: #727272;
+    letter-spacing: -.5px;
 }
 
 /* Site footer */
 
 .category-page .site-footer {
-  border-top: 1px solid #e8e8e8;
-  padding: 30px 0;
+    border-top: 1px solid #e8e8e8;
+    padding: 30px 0;
 }
 
 .category-page .footer-heading {
-  font-size: 18px;
-  font-weight: 300;
-  letter-spacing: -.5px;
-  margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+    margin-bottom: 15px;
 }
 
 /* Page Content styles */
 /* ----------------------------------------------------------*/
 
 .category-page .page-content {
-  padding: 30px 0;
-  background-color: #fff;
+    padding: 30px 0;
+    background-color: #fff;
 }
-
 
 /* Home styles */
 /* ----------------------------------------------------------*/
 
-.home h1 { margin-bottom: 25px; }
+.home h1 {
+    margin-bottom: 25px;
+}
 
-.category-page .posts { list-style-type: none; padding: 0;}
+.category-page .posts {
+    list-style-type: none;
+    padding: 0;
+}
 
-.category-page .posts li { margin-bottom: 30px; }
+.category-page .posts li {
+    margin-bottom: 30px;
+}
 
 .category-page .posts .post-link {
-  font-size: 24px;
-  letter-spacing: -1px;
-  line-height: 1;
+    font-size: 24px;
+    letter-spacing: -1px;
+    line-height: 1;
 }
 
 .category-page .posts .post-date {
-  display: block;
-  font-size: 15px;
-  color: #818181;
-  margin: 0;
+    display: block;
+    font-size: 15px;
+    color: #818181;
+    margin: 0;
 }
 

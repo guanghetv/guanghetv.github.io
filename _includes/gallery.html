@@ -1,11 +1,11 @@
-﻿    <link href="/public/js/vendor/vegas/dist/vegas.min.css" rel="stylesheet" />
-    <link href="/public/css/gallery.css" rel="stylesheet" />
+﻿<link href="/public/js/vendor/vegas/dist/vegas.min.css" rel="stylesheet"/>
+<link href="/public/css/gallery.css" rel="stylesheet"/>
 
-    <script src="/public/js/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/public/js/vendor/vegas/dist/vegas.min.js"></script>
+<script src="/public/js/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/public/js/vendor/vegas/dist/vegas.min.js"></script>
 
-    <div id="gallery-container" class="gallery-container">
-        <div id="photo-gallery" class="photo-gallery">
+<div id="gallery-container" class="gallery-container">
+    <div id="photo-gallery" class="photo-gallery">
         <ul class="photo-control">
             <li class="vegas-next"><i></i></li>
             <li class="vegas-prev"><i></i></li>
@@ -39,41 +39,43 @@
                 </li>
             </ul>
         </div>
-        </div>
     </div>
-    <script>
-        $("#photo-gallery").vegas({
-            delay: 6750,
-            slides: [
-                { src: '/public/img/IMG_6524.jpg' },
-                { src: '/public/img/办公环境2.jpg' },
-                { src: '/public/img/办公环境5.jpg' },
-                { src: '/public/img/外部环境.jpg',
-                    video: {
+</div>
+<script>
+    $("#photo-gallery").vegas({
+        delay: 6750,
+        slides: [
+            {src: '/public/img/IMG_6524.jpg'},
+            {src: '/public/img/办公环境2.jpg'},
+            {src: '/public/img/办公环境5.jpg'},
+            {
+                src: '/public/img/外部环境.jpg',
+                video: {
                     src: [
                         '/public/videos/toboss.mp4'
                     ],
                     loop: false,
                     mute: true
-                } },
-                // { src: '/public/img/DSC_2473.jpg' },
-                { src: '/public/img/IMG_0239.jpg' },
-                { src: '/public/img/lADOAWujlM0CWM0DIA_800_600.jpg' },
-                { src: '/public/img/20150216160548.jpg' },
-                { src: '/public/img/20150216163002.jpg' },
-                { src: '/public/img/1038475081.jpg' },
-                { src: '/public/img/20150216163017.jpg' },
-                { src: '/public/img/20150427152355.jpg' },
-                { src: '/public/img/20140924110958.jpg' }
-            ],
-            overlay: '/public/js/vendor/vegas/dist/overlays/01.png',
-            animation: "random",
-            timer: false
-        });
+                }
+            },
+            // { src: '/public/img/DSC_2473.jpg' },
+            {src: '/public/img/IMG_0239.jpg'},
+            {src: '/public/img/lADOAWujlM0CWM0DIA_800_600.jpg'},
+            {src: '/public/img/20150216160548.jpg'},
+            {src: '/public/img/20150216163002.jpg'},
+            {src: '/public/img/1038475081.jpg'},
+            {src: '/public/img/20150216163017.jpg'},
+            {src: '/public/img/20150427152355.jpg'},
+            {src: '/public/img/20140924110958.jpg'}
+        ],
+        overlay: '/public/js/vendor/vegas/dist/overlays/01.png',
+        animation: "random",
+        timer: false
+    });
 
-        +function () {
-            var timeHandle = 0;
-            var $photoGallery = $("#gallery-container"),
+    +function () {
+        var timeHandle = 0;
+        var $photoGallery = $("#gallery-container"),
                 $control = {
                     common: $(".control .expand"),
                     dragDown: $(".control .drag-down"),
@@ -81,7 +83,7 @@
                     slideUp: $(".control .slide-up")
                 };
 
-            var initialHeight = 52,
+        var initialHeight = 52,
                 docHeight = $(window).height(),
                 commonStateTop = initialHeight - docHeight,
                 maxIncrease = 240,
@@ -89,101 +91,101 @@
                 cursorInitialY = 0,
                 cursorCurrentY = 0;
 
-            // Photo Gallery Initialization
-            $photoGallery.css("top", commonStateTop + "px");
-            //$photoGallery.css("top", 0 + "px");
+        // Photo Gallery Initialization
+        $photoGallery.css("top", commonStateTop + "px");
+        //$photoGallery.css("top", 0 + "px");
 
-            // Event Bind
-            $("#photo-gallery .expand").mousedown(function (e) {
-                // 
-                $("body").css("-webkit-user-select", "none");
-                clearInterval(timeHandle);
-                cursorInitialY = e.clientY;
+        // Event Bind
+        $("#photo-gallery .expand").mousedown(function (e) {
+            //
+            $("body").css("-webkit-user-select", "none");
+            clearInterval(timeHandle);
+            cursorInitialY = e.clientY;
+            cursorCurrentY = e.clientY;
+            initialTop = parseInt($photoGallery.css("top"));
+
+            $control.dragDown.fadeIn().siblings().fadeOut();
+
+            //
+
+            $(document).mousemove(function (e) {
                 cursorCurrentY = e.clientY;
-                initialTop = parseInt($photoGallery.css("top"));
+            });
+            timeHandle = setInterval(function () {
+                var topProp = cursorCurrentY - cursorInitialY + initialTop;
+                var topIncrease = maxIncrease - docHeight;
+                topProp = topProp > commonStateTop ? topProp : commonStateTop;
 
-                $control.dragDown.fadeIn().siblings().fadeOut();
-
-                // 
-
-                $(document).mousemove(function (e) {
-                    cursorCurrentY = e.clientY;
-                });
-                timeHandle = setInterval(function () {
-                    var topProp = cursorCurrentY - cursorInitialY + initialTop;
-                    var topIncrease = maxIncrease - docHeight;
-                    topProp = topProp > commonStateTop ? topProp : commonStateTop;
-
-                    if ($control.release.is(":visible") &&
+                if ($control.release.is(":visible") &&
                         (topProp < topIncrease)) {
-                        $control.dragDown.fadeIn();
-                        $control.release.hide();
-                    }
-
-                    if (topProp > topIncrease) {
-                        $control.release.fadeIn();
-                        $control.dragDown.hide();
-                    }
-                    if (topProp < (topIncrease + 120))
-                        $photoGallery.css("top", topProp + "px");
-                }, 10);
-            });
-
-            $(window).mouseup(function () {
-                $(this).unbind("mousemove");
-                clearInterval(timeHandle);
-                $("body").css("-webkit-user-select", "auto");
-                if ($control.dragDown.is(":visible")) {
-                    $photoGallery.animate({ "top": commonStateTop + "px" }, 300, "swing");
-                    $control.dragDown.fadeOut();
-                    $control.common.fadeIn();
+                    $control.dragDown.fadeIn();
+                    $control.release.hide();
                 }
 
-                if ($control.release.is(":visible")) {
-                    //$photoGallery.animate({ "top": 0 + "px" }, 600, "swing");
-                    $photoGallery.css({
-                        "top": 0 + "px",
-                        "transition": "all ease-in-out 0.6s"
-                    })
-                    setTimeout(function () {
-                        $photoGallery.css({ "transition": "none" });
-                    },600)
-                    $control.release.fadeOut();
-                    $control.slideUp.fadeIn();
+                if (topProp > topIncrease) {
+                    $control.release.fadeIn();
+                    $control.dragDown.hide();
                 }
+                if (topProp < (topIncrease + 120))
+                    $photoGallery.css("top", topProp + "px");
+            }, 10);
+        });
 
-            });
-
-            $control.slideUp.click(function () {
-                $photoGallery.animate({ "top": commonStateTop + "px" }, 600, "swing");
-                $control.slideUp.fadeOut();
+        $(window).mouseup(function () {
+            $(this).unbind("mousemove");
+            clearInterval(timeHandle);
+            $("body").css("-webkit-user-select", "auto");
+            if ($control.dragDown.is(":visible")) {
+                $photoGallery.animate({"top": commonStateTop + "px"}, 300, "swing");
+                $control.dragDown.fadeOut();
                 $control.common.fadeIn();
-            });
+            }
 
-        }.call(this);
+            if ($control.release.is(":visible")) {
+                //$photoGallery.animate({ "top": 0 + "px" }, 600, "swing");
+                $photoGallery.css({
+                    "top": 0 + "px",
+                    "transition": "all ease-in-out 0.6s"
+                })
+                setTimeout(function () {
+                    $photoGallery.css({"transition": "none"});
+                }, 600)
+                $control.release.fadeOut();
+                $control.slideUp.fadeIn();
+            }
 
-        // Photo-desc Active And Switch Photo
-        +function () {
-            var $photoDesc = $(".photo-desc"),
+        });
+
+        $control.slideUp.click(function () {
+            $photoGallery.animate({"top": commonStateTop + "px"}, 600, "swing");
+            $control.slideUp.fadeOut();
+            $control.common.fadeIn();
+        });
+
+    }.call(this);
+
+    // Photo-desc Active And Switch Photo
+    +function () {
+        var $photoDesc = $(".photo-desc"),
                 $nextNode;
 
-            setInterval(function () {
-                $nextNode = $photoDesc.find("li:visible + li");
-                if ($nextNode.length)
-                    $nextNode.fadeIn().siblings().fadeOut();
-                else
-                    $photoDesc.find("li:first").fadeIn().siblings().fadeOut();
-            }, 6000);
+        setInterval(function () {
+            $nextNode = $photoDesc.find("li:visible + li");
+            if ($nextNode.length)
+                $nextNode.fadeIn().siblings().fadeOut();
+            else
+                $photoDesc.find("li:first").fadeIn().siblings().fadeOut();
+        }, 6000);
 
-            var $photoControl = $(".photo-control");
-            $photoControl.find(".vegas-prev").click(function () {
-                return $("#photo-gallery").vegas('previous');
-            });
+        var $photoControl = $(".photo-control");
+        $photoControl.find(".vegas-prev").click(function () {
+            return $("#photo-gallery").vegas('previous');
+        });
 
-            $(".vegas-next").click(function () {
-                return $("#photo-gallery").vegas("next")
-            });
+        $(".vegas-next").click(function () {
+            return $("#photo-gallery").vegas("next")
+        });
 
-        }.call(this);
+    }.call(this);
 
-    </script>
+</script>
