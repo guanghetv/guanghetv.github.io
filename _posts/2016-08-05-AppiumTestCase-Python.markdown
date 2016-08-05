@@ -5,8 +5,6 @@ category: tech
 author: "LiuZhi"
 ---
 
-# Appium Test Case-Python篇
-
 #### Appium的Client/Server结构
 
 appium的核心其实是一个暴露了一系列REST API的server
