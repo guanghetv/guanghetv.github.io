@@ -70,4 +70,4 @@ theme: maupassant
 deploy:
   type: git
   repo: https://github.com/guanghetv/guanghetv.github.io
-  branch: public
+  branch: master
