@@ -1,8 +1,0 @@
----
-layout: post
-title:  "one-dev.com丰富的CSS图标库"
-category: news
-author: "diggzhang"
----
-
-[one-dev.com](http://one-div.com/)是一个丰富的CSS图标库，每个图标是一个div标签，配套提供相关源码，拿来就用。
