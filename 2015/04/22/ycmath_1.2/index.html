@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>洋葱数学Android V1.2版本总结 | 光合新知技术博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">洋葱数学Android V1.2版本总结</h1><a id="logo" href="/.">光合新知技术博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/bookshelf"><i class="fa fa-book"> 书单</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">洋葱数学Android V1.2版本总结</h1><div class="post-meta">Apr 22, 2015<span> | </span><span class="category"><a href="/categories/tech/">tech</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2015/04/22/ycmath_1.2/" href="/2015/04/22/ycmath_1.2/#comments" class="ds-thread-count"></a><div class="post-content"><p>提纲</p>
+<hr>
+<ol>
+<li><strong>必要的趟坑</strong></li>
+<li><strong>app设计结构上进一步分层</strong></li>
+<li><strong>数据输出接口&amp;缓存策略实现</strong></li>
+<li><strong>客户端实现的数据迁移</strong> </li>
+<li><strong>视频下载&amp;管理</strong> </li>
+<li><strong>Gradle多渠道自动打包&amp;自定义apk名</strong></li>
+</ol>
+<p>###一.必要的趟坑</p>
+<hr>
+<p>在正式PRD出来前，产品会和技术这边有个概念性和开放性的需求预期。<br>所以开发可以根据需求的预期，撇开业务，抽象成技术点.</p>
+<ul>
+<li>数据缓存</li>
+<li>视频离线&amp;管理</li>
+</ul>
+<p><strong>数据缓存</strong><br>数据缓存，最基本的点就是缓存容器的选择。<br>在考虑数据结构，灵活性，方便性上的平衡。<br>mobile&amp;nosql&amp;multi-platform<br>趟了差不多一周坑，基本确认<a href="http://dev.guanghe.tv/2015/03/mobile-nosql-db.html" target="_blank" rel="external">Android上nosql平台选择</a>.</p>
+<p><strong>视频下载&amp;管理</strong><br>这个功能模块的基本点是，断点续传，数据库，网络，线程等.<br>早期是想用Android自带的downloadmanager来实现，但是最后发现其在管理上提供的的接口太少。<br>比较适合给app升级模块下载apk使用~要有比较主动性管理下载内容，会有一些坑.<br>系统的api暂时pass，那么找网上一些开源代码，断点的功能现在网络上其实一抓一大把,但是考虑到稳定性，以及扩展性，最后是选择了选择了Android downloadprovider模块源码，来实现了下载管理功能（当然，因为找到是2.3的源码，后期同事在开发中又他做了一些扩展和优化）,但是至少在争论和必要的尝试性下，确定了最终方案。  </p>
+<p>###二.APP设计结构上的进一步分离</p>
+<hr>
+<p> <strong>洋葱数学设计结构:</strong></p>
+<p> <em>APP在1.1版本简单结构</em></p>
+<hr>
+<ul>
+<li>（第一层）应用上层: UI(Avtivity,Fragment,View,) &amp; 管理工具类(manager,utils) &amp; 插件支持(support).</li>
+<li>（第二层）核心层core层:数据获取和处理接口模块(Titan) &amp; 视频播放功能模块(Mediaplayer) </li>
+<li>（第三层）网络数据层 :网络请求。</li>
+</ul>
+<p>第一层基本:  </p>
+<ol>
+<li>获取到数据然后展示到视图  </li>
+<li>期间在UI交互和数据的二次转换上获取上提供一些管理类和帮助类.</li>
+<li>第三方插件的支持类&amp;辅助类。</li>
+</ol>
+<p>第二层</p>
+<ol>
+<li>暴露一个数据接口给第一层,根据输入需要的数据类型（基本就是API）,调用数据层处理后输出给上层.</li>
+<li>预留数据缓存功能。</li>
+<li>其他一些核心功能机制模块。</li>
+</ol>
+<p>第三层 </p>
+<ol>
+<li>数据层简单到只有一个网络请求管理类(netData)和偏好数据管理类</li>
+</ol>
+<p><em>APP在1.2版本结构</em></p>
+<hr>
+<p>第一层:不变</p>
+<p>第二层:</p>
+<ol>
+<li>暴露的数据接口层（在结构上不变，功能上有变动）</li>
+<li><code>数据获策略层</code>（新增数据获取策略层,针对新加的缓存功能）</li>
+<li>不变</li>
+</ol>
+<p>第三层:</p>
+<ol>
+<li>网络数据层</li>
+<li><code>本地数据层</code></li>
+</ol>
+<p><em>APP在1.3+版本后的构想结构</em></p>
+<hr>
+<p>第一层:不变<br>第二层:<br>新增 </p>
+<ul>
+<li><code>在数据接口层和策略层中间引入一个独立的业务子层（数据接口层完全抽象为一个接口,路由到各自的业务子层,业务子层再来路由数据策略子层 &amp; 数据处理.）tips，保证原来的1.2版本前的上层数据获取都无需改动，但是略显浮夸。也考虑直接将Titan直接分裂成独立的业务处理接口。</code></li>
+</ul>
+<p>第三层: 不变</p>
+<p>###三.数据输出接口&amp;缓存策略</p>
+<hr>
+<p><strong>数据输出接口</strong><br>定义数据获取接口Titan,在现在轻业务上场景下，所以直接提供一个最简单的统一接口。<br>Titan在数据获取上又通过缓存策略子层来分担和分离其功能.<br>1.2版本的Titan的功能是数据获取的路由选择 &amp;以及网络数据—》本地数据缓存的处理过滤（数据迁移）。</p>
+<p>之后的扩展可能考虑在通过一个业务处理核心子层来分担Titan,Titan完全作为一个对上层接口存在,Titan根据业务来路由选择相应的业务模块，业务模块根据缓存策略来路由选择数据获取(并且来实现各自的数据迁移功能)。<br>也就是面的 <strong>App结构上的进一步分离</strong>  </p>
+<p><strong>缓存策略</strong><br>保持APP永远有内容分呈现.<br>有网情况:</p>
+<ol>
+<li>先获取本地,有数据，返回状态&amp;缓存数据填充；其他，返回状态。</li>
+<li>请求网络，获取正常返回状态&amp;数据刷新；其他，返回状态。</li>
+</ol>
+<p>无网情况:</p>
+<ol>
+<li>获取本地，有数据，返回状态和缓存数据;其他，返回状态。</li>
+</ol>
+<p>同时在网络请求获取数据上做网络缓存扩展，如网络获取设置了一个时间间隔，优化频繁刷新带来的网络性能和流量问题.</p>
+<p>###四.客户端实现的数据迁移</p>
+<hr>
+<p>App V1.2版本我们mobile数据库和PC的同步,需要做数据过滤(早期是直接服务端部署一个mobile数据库，定期跑脚本做数据迁移，返回的数据结构就是客户端呈现结构)。<br>数据同步后，返回的数据结构需要客户端来处理和过滤,那么就考虑到这个数据的处理和过滤在那一层来实现。<br>以及我到底存储是原始数据（远程 serverDb 数据），还是处理过滤的数据（即客户端来实现了v1.2版本前,后台实现的数据迁移过程）。 </p>
+<ul>
+<li>原始数据存储的优缺点:利,和pc端数据同步，对后期迭代时数据上一劳永逸, 扩展性更高;弊,每次取出来的数据都需要做处理和过滤，过滤可以做在core层(Titan),或是在上层数据展现到View时做处理（只展示APP结构上需要的）,做在core可能处理会太过频繁时性能问题,在上层做的话,现在改动较大(因为1.2版本在数据结构呈现上基本和1.1版本相同)</li>
+<li>处理过的数据存储优缺点:利，对于上层改动最小;弊,即原始存储的利.</li>
+</ul>
+<p>目前因为迭代时间的问题，取了第二种。具体下个版本再看产品需求来平衡。</p>
+<p>性能上有弊端（现在返回的结构树deep太大）&amp;最小改动优点的平衡。</p>
+<p>###五.视频下载&amp;管理</p>
+<hr>
+<p>完全可以开一个单独的版来介绍。<br>基本出发点是基于Google的原生下载管理做修改扩展<br>涉及到得技术:Service  &amp; Broadcast &amp; notification &amp; 数据库（contentprovider）&amp; 线程 &amp;线程池 &amp; http网络编程 &amp; 几种设计模式<br>目前实现了基本的下载管理需求，持续迭代。</p>
+<p>###六.Gradle多渠道自动打包</p>
+<hr>
+<p>脚本解放双手</p>
+<p>配置渠道:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//配置渠道</span></div><div class="line">   <span class="class">productFlavors </span>&#123;</div><div class="line">       <span class="class">_guanghetv </span>&#123;</div><div class="line">           manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"guanghetv"</span>]</div><div class="line">        &#125;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>配置apk name</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//自定义输出的apk名</span></div><div class="line">   applicationVariants.all &#123; variant -&gt;</div><div class="line">       variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</div><div class="line">           <span class="keyword">def</span> outputFile = output.outputFile</div><div class="line">           <span class="keyword">if</span> (outputFile != <span class="keyword">null</span> &amp;&amp; outputFile.name.endsWith(<span class="string">'.apk'</span>)) &#123;</div><div class="line">               <span class="keyword">def</span> fileName = <span class="string">"YCMath_Android_V$&#123;defaultConfig.versionName&#125;$&#123;variant.productFlavors[0].name&#125;.apk"</span></div><div class="line">               output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(outputFile.parent, fileName)</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>终端命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew assembleRelease</div></pre></td></tr></table></figure></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2015/04/22/ycmath_1.2/" data-id="ciwhgqn8x001i83az13lb1qfp" class="article-share-link">分享到</a><div class="tags"></div><div class="post-nav"><a href="/2015/04/22/js-pretty-date/" class="pre">JavaScript Pretty Date</a><a href="/2015/04/22/visual-guide-for-css-flexbox/" class="next">A Visual Guide of CSS3 Flexbox</a></div><div data-thread-key="2015/04/22/ycmath_1.2/" data-title="洋葱数学Android V1.2版本总结" data-url="http://yoursite.com/2015/04/22/ycmath_1.2/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2015/04/22/ycmath_1.2/" data-title="洋葱数学Android V1.2版本总结" data-url="http://yoursite.com/2015/04/22/ycmath_1.2/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">76</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tech/">tech</a><span class="category-list-count">35</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/android-nosql-realm-couchbase/" style="font-size: 15px;">android,nosql,realm,couchbase</a> <a href="/tags/CI-Appium/" style="font-size: 15px;">CI,Appium</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/2015-12-8-scapy/">scapy与路由轨迹图</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/AppiumTestCase-Python/">Appium Test Case-Python篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/27/how-to-use-react-native-navigator/">如何使用react native中的Navigator组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/25/jinkens-PitRecords/">Jinkens+踩坑纪录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/jinkens-iOSTest/">Jinkens+iOS测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/appium-nodeTest/">Appium+nodeJS测试用例编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/recovering-a-wiredtiger-collection-from-a-corrupt-wt-file/">从损坏的wt文件中恢复出WiredTiger集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/13/best-practice-of-config-for-nodejs-projects/">Nodejs项目配置文件最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-test/">Appium+Eclipse编写测试用例</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-config/">Mac环境下如何配置Appium</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://yangcong345.com/" title="洋葱数学官网" target="_blank">洋葱数学官网</a><ul></ul><a href="https://github.com/guanghetv/" title="Github主页" target="_blank">Github主页</a><ul></ul><a href="https://facebook.github.io/react-native/" title="ReactNative" target="_blank">ReactNative</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">光合新知技术博客.</a> Tech<a rel="nofollow" target="_blank" href="https://hexo.io"></a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"></a> <a rel="nofollow" target="_blank" href="https://github.com/pagecho"></a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'antsun'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

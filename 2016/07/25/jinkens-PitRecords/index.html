@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Jinkens+踩坑纪录 | 光合新知技术博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Jinkens+踩坑纪录</h1><a id="logo" href="/.">光合新知技术博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/bookshelf"><i class="fa fa-book"> 书单</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Jinkens+踩坑纪录</h1><div class="post-meta">Jul 25, 2016<span> | </span><span class="category"><a href="/categories/tech/">tech</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2016/07/25/jinkens-PitRecords/" href="/2016/07/25/jinkens-PitRecords/#comments" class="ds-thread-count"></a><div class="post-content"><h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><h4 id="Jenkins的通俗概念"><a href="#Jenkins的通俗概念" class="headerlink" title="Jenkins的通俗概念"></a>Jenkins的通俗概念</h4><p>jenkins是一个广泛用于持续构建的可视化web工具，说白了就是各种项目的”自动化”编译、打包、分发部署。jenkins可以很好的支持各种语言（比如：java, c#, php等）的项目构建，也完全兼容ant、maven、gradle等多种第三方构建工具，同时跟svn、git能无缝集成，也支持直接与知名源代码托管网站，比如github、bitbucket。</p>
+<h4 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h4><p><a href="http://linjunpop.logdown.com/posts/162202-set-up-jenkins-server-on-the-mac-mini-to-run-ios-tests" target="_blank" rel="external">传送门</a></p>
+<p>这里需要注意的是：</p>
+<ul>
+<li>教程里的如下这句不能删除，而是把ip地址改为广播地址，即\<string>–httpListenAddress=0.0.0.0\</string></li>
+</ul>
+<blockquote>
+<p>如果要其他机器也可以访问，把plist里的\<string>–httpListenAddress=127.0.0.1\</string>删掉即可</p>
+</blockquote>
+<ul>
+<li>要用命令行来安装，安装包类的安装方法会有意想不到的坑，故不推荐</li>
+</ul>
+<h5 id="主要坑介绍"><a href="#主要坑介绍" class="headerlink" title="主要坑介绍"></a>主要坑介绍</h5><ol>
+<li><p>系统管理&gt;系统设置&gt;全局属性</p>
+<p> 这里要配置sdk，键：ANDROID_HOME，值：sdk路径</p>
+<p> 未配置该项时，集成编译过程中会报出未配置ANDROID_HOME环境变量的错，容易误导去配置电脑的系统环境变量</p>
+</li>
+<li><p>系统管理&gt;系统设置&gt;Jenkins Location</p>
+<p> Jenkins URL：此项是可选的,指定安装Jenkins的HTTP地址,例如<a href="http://yourhost.yourdomain/jenkins/" target="_blank" rel="external">http://yourhost.yourdomain/jenkins/</a>. 这个值用来在邮件中生产Jenkins链接.此项是有必要的,因为Jenkins无法探测到自己的URL地址.</p>
+</li>
+<li><p>系统管理&gt;系统设置&gt;邮件通知</p>
+<p> 这里时配置邮件发送服务器，经百般尝试，公司的企业邮箱，并不能顺利生效，推测原因在于outlook邮箱只能用POP和IMAP，而不支持SMTP。若使用163邮箱，可以顺利生效，但经常发送jenkins的邮件，过一大段时间以后，163会以为你老发垃圾邮件，就不让你发了</p>
+</li>
+<li><p>系统管理&gt;插件管理</p>
+<p> 这里就说几个用到的插件</p>
+<ul>
+<li>Git plugin:必装，拉代码用</li>
+<li>Gradle plugin:必装，编译android项目</li>
+<li>HTML Publisher plugin:该插件是为了在jenkins web页面上方便的查看appium产生测试用例报告用</li>
+<li>fir-plugin:<a href="http://blog.fir.im/jenkins/" target="_blank" rel="external">该插件需要手动安装</a>，自动发布到fir</li>
+</ul>
+</li>
+<li><p>系统管理&gt;Global Tool Configuration</p>
+<p> Android持续集成必备环境配置</p>
+<ul>
+<li>JDK</li>
+<li>Git</li>
+<li>Gradle</li>
+</ul>
+</li>
+<li><p>系统管理&gt;脚本命令行</p>
+<pre><code>System.setProperty(&quot;hudson.model.DirectoryBrowserSupport.CSP&quot;, &quot;sandbox allow-scripts; style-src &apos;unsafe-inline&apos; *;script-src &apos;unsafe-inline&apos; *;&quot;)
+</code></pre></li>
+<li><p>项目&gt;配置</p>
+<ul>
+<li>General:这里是基本的无关痛痒的配置</li>
+<li>源码管理:这里主要配置下git地址，账户密码，以及要构建的分支、或Tag</li>
+<li><p>构建触发器:这里重点说两个配置</p>
+<p>  Build periodically:定时触发构建</p>
+<p>  Poll SCM:定时检查是否有新代码，有则构建</p>
+<p>  参数：</p>
+<pre><code>根据开发需要，假设每一个小时我们需要重新构建一次。选择 Build periodically，在 Schedule 中填写 0 * * * *。第一个参数代表的是分钟 minute，取值 0~59；第二个参数代表的是小时 hour，取值 0~23；第三个参数代表的是天 day，取值 1~31；第四个参数代表的是月 month，取值 1~12；最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。所以 0 * * * * 表示的就是每个小时的第 0 分钟执行一次构建。
+</code></pre></li>
+<li><p>构建&gt;Invoke Gradle script:</p>
+<p>  Gradle Version:这里选第五点配置的Gradle版本</p>
+<p>  Tasks:这里填写常见的gradle 命令，如:clean assemble_guanghetvDebug –stacktrace –debug</p>
+</li>
+<li><p>构建&gt;Execute shell:这里配置appium的测试脚本，如：python script/py261.py，脚本放在了工程目录下的script文件夹下</p>
+</li>
+<li><p>构建后操作&gt;Archive the artifacts:这个配置YCMath/build/outputs/<em>\</em>/*.apk，用于保存生成的apk</p>
+</li>
+<li><p>构建后操作&gt;Publish HTML reports:</p>
+<p>  HTML directory to archive:script/result,测试报告输出的位置</p>
+<p>  Index page[s]:index.html,这里要在script/result文件夹中手动添加一个index.html文件，内容如下，这样在jenkins web中可以快捷链接到测试报告列表</p>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;document.location = &apos;*&apos;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</code></pre></li>
+<li><p>构建后操作&gt;E-mail Notifation，发送构建邮件</p>
+</li>
+<li><p>构建后操作&gt;Upload to fir.im，自动发布到fir</p>
+<p>  ExInclude IPA/APK File Name：这里过滤的是<strong>不要上传</strong>的文件</p>
+<pre><code>**/*unaligned*.apk,**/*unsigned*.apk
+</code></pre></li>
+</ul>
+</li>
+</ol>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2016/07/25/jinkens-PitRecords/" data-id="ciwhgqnc9006a83azovgws6d2" class="article-share-link">分享到</a><div class="tags"></div><div class="post-nav"><a href="/2016/07/27/how-to-use-react-native-navigator/" class="pre">如何使用react native中的Navigator组件</a><a href="/2016/07/22/jinkens-iOSTest/" class="next">Jinkens+iOS测试</a></div><div data-thread-key="2016/07/25/jinkens-PitRecords/" data-title="Jinkens+踩坑纪录" data-url="http://yoursite.com/2016/07/25/jinkens-PitRecords/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2016/07/25/jinkens-PitRecords/" data-title="Jinkens+踩坑纪录" data-url="http://yoursite.com/2016/07/25/jinkens-PitRecords/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">76</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tech/">tech</a><span class="category-list-count">35</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/android-nosql-realm-couchbase/" style="font-size: 15px;">android,nosql,realm,couchbase</a> <a href="/tags/CI-Appium/" style="font-size: 15px;">CI,Appium</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/2015-12-8-scapy/">scapy与路由轨迹图</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/AppiumTestCase-Python/">Appium Test Case-Python篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/27/how-to-use-react-native-navigator/">如何使用react native中的Navigator组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/25/jinkens-PitRecords/">Jinkens+踩坑纪录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/jinkens-iOSTest/">Jinkens+iOS测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/appium-nodeTest/">Appium+nodeJS测试用例编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/recovering-a-wiredtiger-collection-from-a-corrupt-wt-file/">从损坏的wt文件中恢复出WiredTiger集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/13/best-practice-of-config-for-nodejs-projects/">Nodejs项目配置文件最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-test/">Appium+Eclipse编写测试用例</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-config/">Mac环境下如何配置Appium</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://yangcong345.com/" title="洋葱数学官网" target="_blank">洋葱数学官网</a><ul></ul><a href="https://github.com/guanghetv/" title="Github主页" target="_blank">Github主页</a><ul></ul><a href="https://facebook.github.io/react-native/" title="ReactNative" target="_blank">ReactNative</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">光合新知技术博客.</a> Tech<a rel="nofollow" target="_blank" href="https://hexo.io"></a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"></a> <a rel="nofollow" target="_blank" href="https://github.com/pagecho"></a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'antsun'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

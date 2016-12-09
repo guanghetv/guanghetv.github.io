@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>React 懒人教程 | 光合新知技术博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">React 懒人教程</h1><a id="logo" href="/.">光合新知技术博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/bookshelf"><i class="fa fa-book"> 书单</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">React 懒人教程</h1><div class="post-meta">Dec 30, 2015<span> | </span><span class="category"><a href="/categories/tech/">tech</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2015/12/30/ReactJS-For-Stupid-People/" href="/2015/12/30/ReactJS-For-Stupid-People/#comments" class="ds-thread-count"></a><div class="post-content"><p>原文：<a href="http://blog.andrewray.me/reactjs-for-stupid-people/" target="_blank" rel="external">查看原文</a><br>翻译：<a href="http://www.suisuijiang.com" target="_blank" rel="external">碎碎酱</a></p>
+<p>我曾经努力了很长一段时间来尝试理解什么是React，以及React适合用于软件开发的哪一部分，这篇文章就是关于我曾经想要获取的那些信息。</p>
+<p>##什么是React？</p>
+<p>React和Angular, Ember, Backbone或者其它框架比较起来怎么样？我该怎么样处理数据？我该怎么样与后端联系起来？什么是JSX？什么是组件？</p>
+<p>停！</p>
+<p>先不要考虑这些问题！</p>
+<p>##React仅仅是View层</p>
+<p>React经常与其它JavaScript框架一起被提及，但是像『React VS Angular』这样的比较是没有意义的，因为它们并不是可以直接比较的事物。Angular是一个完整的框架（包含View层），React却不是，这就是React使人晕头转向、难以理解的原因，它只是一个新兴的、一个完整框架生态系统中的一环，它仅仅是View层。</p>
+<p>React给了你提供了一种模板语言和一些钩子函数来渲染真实的HTML，它仅包含唯一输出：HTML。你会封装HTML/JavaScript代码并称之为组件，组件支持在内存中存储它自己的状态（比如在Tab View中哪个标签被选中），但是最终仅仅被输出为HTML。</p>
+<p>你绝对不可能仅仅使用React来构建一个功能完备的动态WEB应用，我们将在接下来学习更多的内容关于它为什么不可以。</p>
+<p>##优点</p>
+<p>在用React工作一段时间后，我发现了三个很重要的、有价值的点。</p>
+<p>###1.你总是可以仅仅查看一个源文件就得知组件会如何被渲染</p>
+<p>这可能是最重要的好处，甚至尽管它与Angular的模板没有什么不同，让我们使用一个真实的例子来说明</p>
+<p>假如你需要在用户登录后修改网站头部的用户名显示，如果你没有使用JavaScript MVC框架的话，你可能会这样做：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"name"</span>&gt;</span></div><div class="line">        Not Logged In</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.post(<span class="string">'/login'</span>, credentials, <span class="function"><span class="keyword">function</span>(<span class="params"> user </span>) </span>&#123;</div><div class="line">    <span class="comment">// Modify the DOM here</span></div><div class="line">    $(<span class="string">'header .name'</span>).text( user.name );</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我可以用我以往的经验来告诉你，这个代码会摧毁你的生活和你同事的生命，你如何去调试输出？谁来修改头部内容？还有谁可以访问头部的HTML代码？谁控制着修改用户名显示的代码段？这种DOM操作就像goto关键字一样，使你很难去推算代码逻辑。</p>
+<p>下面这段代码是如何使用React来做这件事：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">render: function() &#123;  </div><div class="line">    return (</div><div class="line">        <span class="variable">&lt;header&gt;</span></div><div class="line">        &#123; </div><div class="line">            this.<span class="keyword">state</span>.name ?</div><div class="line">            this.<span class="keyword">state</span>.name :</div><div class="line">            <span class="variable">&lt;span&gt;</span>Not Logged In&lt;/span&gt; </div><div class="line">        &#125;</div><div class="line">        &lt;/header&gt;</div><div class="line">    );</div></pre></td></tr></table></figure>
+<p>我们可以很直接的看出这个组件将如何被渲染，只要你知道组件的状态，你就会知道组件渲染后的输出，你不需要追溯程序流，当工作于复杂的应用程序时，特别是处于团队中时，这一点十分重要。</p>
+<p>###2.将HTML/JavaScript代码封装在JSX中使得组件很容易被理解</p>
+<p>上面这种怪异的将HTML/JavaScript混合编写的行为可能会使你畏惧，在过去很早的时候，我们已经适应了将JavaScript与HTML分离（譬如onClick处理过程），但是，现在你需要相信我，使用JSX来编写React组件是十分美好的。</p>
+<p>传统上，我们将视图（HTML）与功能（JavaScript）分离，这导致我们会为一个网页编写一个整块的JavaScript文件包含页面所需的所有功能，这使你不得不去追溯复杂的工作流 JS &gt; HTML &gt; JS &gt; bad-news-sad-time。</p>
+<p>尝试将函数封装在便于使用的、独立的组件中会使你感到美好，并且会降低全局污染，你的JavaScript代码清楚的知道如何控制你的HTML代码，因此将它们揉合在一起是有意义的。</p>
+<p>###3.你可以在服务端渲染React</p>
+<p>如果你正在构建一个开放的网站或者移动端app，并且你是按照将其全部加载到客户端（render-it-all-on-the-client）的办法，那么你过去都做错了，仅在客户端渲染就是导致<a href="https://soundcloud.com/" target="_blank" rel="external">SoundCloud</a>感觉很缓慢而<a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a>（纯粹的服务端渲染）却感觉很快的原因，你可以在服务端渲染React，而且你很应该这样做。</p>
+<p>Angular和其它框架鼓励你使用PhantomJS来处理一些烦人的事情譬如页面渲染，基于用户代理为网络搜索爬虫服务，或者获取花钱来购买这种服务。</p>
+<p>##缺点</p>
+<p>不要忘记React仅仅是View层</p>
+<p>1.它不包含下列内容</p>
+<ul>
+<li>AJAX功能</li>
+<li>数据表格</li>
+<li>Promises</li>
+<li>任何应用框架</li>
+<li>任何实现上述内容的想法</li>
+</ul>
+<p>在实际业务中仅仅使用React是无用的，更糟糕的是，就像我们将要看到的那样，这将导致每个人不断的重复造轮子</p>
+<p>2.文档不友好，难以阅读，就像写给懒人的博客文章，请在<a href="http://facebook.github.io/react/docs/getting-started.html" target="_blank" rel="external">React Doc</a>中查看导航栏的第一部分。这里有三个分离的，相互矛盾的快速开始引导，我完全看晕了，它下面的侧边栏简直是我的噩梦，一条条很明显的内容不该出现在这里，比如”More About Refs” 和 “PureRenderMixin”。</p>
+<p>##说说Flux</p>
+<p>大概大多数的React开发者最恼人的部分就是Flux，它远远比React更容易使人晕头转向，Flux这个名字就是一个理解的障碍。</p>
+<p>并没有Flux这个事物，Flux是一种概念，而不是一个库，这里是<a href="https://github.com/facebook/flux" target="_blank" rel="external">Flux的实现</a></p>
+<p>Flux更像是一种模式，而不是一个框架</p>
+<p>React并没有彻底改造过去40年来的UI构建知识，它是带着一些数据管理的新观念出现的。</p>
+<p>Flux的内容简单讲就是，你的视图触发一个动作（在用户键入用户名之后），这个动作将会更新模型，然后模型触发一个事件，视图响应模型的事件，并使用最终的数据重新渲染自身，这就是Flux。</p>
+<p>这个单向的工作流、观察者模式的设计可以保证你的源代码事实上的与存储/模型相分离，这样做是极好的。</p>
+<p>Flux不好的一点是很多人都有自己的实现，没有一致的事件库、模型层、AJAX层以及其它内容，目前有着很多不同的Flux实现，并且它们彼此竞争。</p>
+<p>##我该使用React吗？</p>
+<p>简单讲：应该</p>
+<p>###你该使用React的理由：</p>
+<ul>
+<li>适合团队开发，健壮的、易于使用的UI和工作流</li>
+<li>UI代码是易读的和便于维护的</li>
+<li>组件化UI是WEB开放的将来，你应该现在就开始这么做</li>
+</ul>
+<p>###在决定使用之前你需要思考更多：</p>
+<ul>
+<li>React会非常明显的降低首页渲染速度，理解什么是state、什么是props和组件交互等内容并不简单，并且文档的内容使人迷惑，它将会是一个冲击，理论上，会大大加速你整个团队的效率。</li>
+<li>React并不支持IE8或者更低版本，并且永远不会。</li>
+<li>如果你的网站/应用并不需要太多的动态页面更新，你将会很小的益处而额外编写大量的代码。</li>
+<li>你将会创造大量轮子，React还很年轻，并且目前还没有权威的方法来解决事件/组件交流。</li>
+</ul>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2015/12/30/ReactJS-For-Stupid-People/" data-id="ciwhgqnbj004y83azid1siglv" class="article-share-link">分享到</a><div class="tags"></div><div class="post-nav"><a href="/2015/12/31/Getting-Started-With-React-And-JSX/" class="pre">React和JSX入门指导</a><a href="/2015/12/28/mongoshell-extension/" class="next">mongoshell extension</a></div><div data-thread-key="2015/12/30/ReactJS-For-Stupid-People/" data-title="React 懒人教程" data-url="http://yoursite.com/2015/12/30/ReactJS-For-Stupid-People/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2015/12/30/ReactJS-For-Stupid-People/" data-title="React 懒人教程" data-url="http://yoursite.com/2015/12/30/ReactJS-For-Stupid-People/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/news/">news</a><span class="category-list-count">76</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tech/">tech</a><span class="category-list-count">35</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/android-nosql-realm-couchbase/" style="font-size: 15px;">android,nosql,realm,couchbase</a> <a href="/tags/CI-Appium/" style="font-size: 15px;">CI,Appium</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/09/2015-12-8-scapy/">scapy与路由轨迹图</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/AppiumTestCase-Python/">Appium Test Case-Python篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/27/how-to-use-react-native-navigator/">如何使用react native中的Navigator组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/25/jinkens-PitRecords/">Jinkens+踩坑纪录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/jinkens-iOSTest/">Jinkens+iOS测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/appium-nodeTest/">Appium+nodeJS测试用例编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/recovering-a-wiredtiger-collection-from-a-corrupt-wt-file/">从损坏的wt文件中恢复出WiredTiger集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/13/best-practice-of-config-for-nodejs-projects/">Nodejs项目配置文件最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-test/">Appium+Eclipse编写测试用例</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/appium-config/">Mac环境下如何配置Appium</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://yangcong345.com/" title="洋葱数学官网" target="_blank">洋葱数学官网</a><ul></ul><a href="https://github.com/guanghetv/" title="Github主页" target="_blank">Github主页</a><ul></ul><a href="https://facebook.github.io/react-native/" title="ReactNative" target="_blank">ReactNative</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">光合新知技术博客.</a> Tech<a rel="nofollow" target="_blank" href="https://hexo.io"></a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"></a> <a rel="nofollow" target="_blank" href="https://github.com/pagecho"></a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'antsun'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
