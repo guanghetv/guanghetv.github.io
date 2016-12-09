@@ -1,0 +1,95 @@
+---
+layout: post
+title:  "快速去重算法"
+category: tech
+author: "libook"
+---
+
+开发数据平台的时候遇到了性能瓶颈；
+当我用lodash的uniq方法去重一个很大的数组的时候，性能非常的差，
+后来在stackoverflow上找到了很多神奇的去重技巧：
+
+例如我目前用的快得让人无法相信的奇怪算法：
+
+```javascript
+var array = [1, 2, 3, 4, 5, 6, 2, 3, 4];
+var obj = {};
+array.forEach(function(id){obj[id] = true});
+array = Object.keys(obj);
+```
+这个利用了对象的key是uniq的这种性质。
+
+还有一种思想类似的，可读性也类似的：
+
+```javascript
+Array.prototype.getUnique = function() {
+    var o = {}, a = []
+    for (var i = 0; i < this.length; i++) o[this[i]] = 1
+    for (var e in o) a.push(e)
+    return a
+}
+```
+
+另一种是利用了对象具有的hasOwnProperty方法来快速查询重复元素的，这种也非常快，
+速度与第一种不相上下：
+
+```javascript
+Array.prototype.getUnique = function(){
+   var u = {}, a = [];
+   for(var i = 0, l = this.length; i < l; ++i){
+      if(u.hasOwnProperty(this[i])) {
+         continue;
+      }
+      a.push(this[i]);
+      u[this[i]] = 1;
+   }
+   return a;
+}
+```
+
+JavaScript 1.6 / ECMAScript 5 的数组有一个原生的方法filter，速度也非常快，
+也可以达到uniq的效果：
+
+```javascript
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
+// usage example:
+var a = ['a', 1, 'a', 2, '1'];
+var unique = a.filter( onlyUnique ); // returns ['a', 1, 2, '1']
+```
+
+另外jQuery竟然有grep方法，而且速度出乎意料的快：
+
+```javascript
+arr = $.grep(arr, function(v, k){
+    return $.inArray(v ,arr) === k;
+});
+```
+
+表示从来没用过Array自带的reduce方法，用于去重同样令人惊艳：
+
+```javascript
+[0,1,2,0,3,2,1,5].reduce(function(prev, cur) {
+    return (prev.indexOf(cur) < 0) ? prev.concat([cur]) : prev;
+ }, []);
+```
+
+有一个~~小学生~~人在stackoverflow上号称是比所有算法都要快10倍以上的算法：
+
+```javascript
+var array=[1,2,3,4,5,6,7,8,9,0,1,2,1];
+function toUnique(a,b,c){//array,placeholder,placeholder
+ b=a.length;
+ while(c=--b)while(c--)a[b]!==a[c]||a.splice(c,1);
+ return a // not needed ;)
+}
+toUnique(array)
+//[3, 4, 5, 6, 7, 8, 9, 0, 2, 1] 
+```
+不过很可惜，我用chrome的console测试的时候由于计算时间太长，页面crash掉了。
+
+总结：用很奇怪的算法来提升性能有时候确实效果惊人，但是也要注意写好充分封装和注释，
+要不然鬼才看得出来你写的算法是干嘛用的（“鬼才”是谁？好厉害！）233～～
+

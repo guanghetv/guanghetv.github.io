@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "vibrant"
+category: news
+author: "sl"
+---
+
+[vibrant.js](https://github.com/jariz/vibrant.js ) 是一个自动提取图片重要颜色的库.
+咱们前端图标可能用到.
+

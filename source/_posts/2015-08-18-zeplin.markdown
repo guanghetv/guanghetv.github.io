@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Zeplin设计师和前端的沟通利器"
+category: news
+author: "diggzhang"
+---
+
+如果Sketch打开了前端走向设计的大门，那么Zeplin则是设计走向前端的捷径。
+
+[Zeplin](https://zeplin.io)是sketch上的一款插件应用，它可以识别UI图的配色、字体信息，计算图片参数。最值得一体的是，识别的元素可以导出为Objectiv-C设计所需的信息。
+
+除此之外，zeplin还支持多人在线编辑同一个项目。
+

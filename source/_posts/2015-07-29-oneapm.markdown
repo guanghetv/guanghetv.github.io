@@ -1,0 +1,58 @@
+---
+layout: post
+title:  "服务器性能检测工具Oneapm"
+category: news
+author: "diggzhang"
+---
+
+ONEAPM不仅仅是一款服务器性能监控工具。它模仿实真实用户发出请求，从终端采集性能数据，从而度量应用性能表现。根据真实用户体验，发觉问题影响范围。在分布式环境中，定位事务的性能瓶颈。
+申请付费版本试用为15天，免费版有功能阉割(只支持SaaS)。
+
+- 可以帮我们找到 Node.js 应用内部性能表现最差的事务，还可以定位数据库中能耗最大的部件
+- OneAPM的Agent支持mongoDB
+
+部署超简单:
+
+- 在[OneAPM](http://www.oneapm.com)注册并添加应用，获取授权编号。
+- 安装oneapm package
+
+```
+
+    npm install oneapm --registry http://npm.oneapm.com
+
+```
+
+- 安装方法2, 从官网下载最新版本的oneapm包,在待监控程序目录下安装
+
+```
+
+    npm install <LocationOfYourOneAPMAgent>/oneapm-x.x.x.tgz
+
+```
+
+- 安装过后，将配置文件拷贝到待监控程序主目录,之后将第一步获取的授权编号粘贴到配置文件license_key配置行
+
+```
+
+    cd APP/
+    cp node_modules/oneapm/oneapm.js ./
+
+    vim oneapm.js
+
+    ...
+
+        license_key: '<keyhere>'
+    ...
+
+```
+
+- 在程序主模块文件中引入OneAPM,require到程序第一行
+
+```
+
+    var agent = require('oneapm');
+
+```
+
+- 5分钟后，即可在OneAPM控制台看到监控信息
+
