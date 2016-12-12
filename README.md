@@ -9,13 +9,15 @@ Guanghe.tv Developer Blog .
 
 使用说明
 ---------
-1.clone branch dev 
+1.clone branch **dev**
 
 2.npm install
 
 3.将文章放到source->_posts中
 
-4.发布 npm run deploy  
+4.发布 npm run deploy 
+
+5.**千万别忘了将你的 commit 提交** 
 
 相关链接
 ------
